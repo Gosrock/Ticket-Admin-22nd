@@ -1,0 +1,4 @@
+//유저 조회 디스패치 관련
+export const GET_USER_LOOKUP = "GET_USER_LOOKUP";
+export const GET_USER_LOOKUP_SUCCESS = "GET_USER_LOOKUP_SUCCESS";
+export const GET_USER_LOOKUP_ERROR = "GET_USER_LOOKUP_ERROR";
