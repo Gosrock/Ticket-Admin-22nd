@@ -10,15 +10,24 @@ import React from "react";
 import { withNavigation } from "../../hoc/withRouterForClass";
 import { Route, Routes } from "react-router-dom";
 import "./MainLayout.css";
+import LandingPage from "../LandingPage/LandingPage";
+import UsersPage from "../Tables/UsersPage/UsersPage";
+import TicketsPage from "../Tables/TicketsPage/TicketsPage";
+import OrdersPage from "../Tables/OrdersPage/OrdersPage";
+import EnterPage from "../Tickets/EnterPage/EnterPage";
+import CheckPage from "../Tickets/CheckPage/CheckPage";
+import AccoutPage from "../AccountPage/AccoutPage";
 
 const { Content, Footer, Sider } = Layout;
 
 const keyToInfo = {
-  main1: { text: "회원 관리", link: "/user/lookup" },
-  main2: { text: "장소 지도", link: "/places/map" },
-  main3: { text: "장소 관리", link: "/places/list" },
-  main4: { text: "키워드 관리", link: "/keywords" },
-  main5: { text: "계정", link: "/account" },
+  main1: { text: "랜딩 페이지", link: "/landing" },
+  main2: { text: "유저 페이지", link: "/table/users" },
+  main3: { text: "주문목록 페이지", link: "/table/orders" },
+  main4: { text: "티켓 페이지", link: "/table/tickets" },
+  main5: { text: "실시간 티켓 입장확인", link: "/tickets/enter" },
+  main6: { text: "카메라 입장 확인", link: "/tickets/check" },
+  main7: { text: "계정", link: "/accounts" },
 };
 
 let clickedkeyPath = ["main1"];
@@ -77,27 +86,41 @@ class MainLayout extends React.Component {
             onClick={this.menuClick}
           >
             <Menu.Item key="main1" icon={<UserOutlined />}>
-              회원 관리
+              {keyToInfo["main1"].text}
             </Menu.Item>
             <Menu.Item key="main2" icon={<GlobalOutlined />}>
-              장소 지도
+              {keyToInfo["main2"].text}
             </Menu.Item>
             <Menu.Item key="main3" icon={<CompassOutlined />}>
-              장소 관리
+              {keyToInfo["main3"].text}
             </Menu.Item>
             <Menu.Item
               key="main4"
               icon={<SortAscendingOutlined />}
               style={{ marginTop: "auto" }}
             >
-              키워드 관리
+              {keyToInfo["main4"].text}
             </Menu.Item>
             <Menu.Item
               key="main5"
               icon={<IdcardOutlined />}
               style={{ marginTop: "auto" }}
             >
-              계정
+              {keyToInfo["main5"].text}
+            </Menu.Item>
+            <Menu.Item
+              key="main6"
+              icon={<IdcardOutlined />}
+              style={{ marginTop: "auto" }}
+            >
+              {keyToInfo["main6"].text}
+            </Menu.Item>
+            <Menu.Item
+              key="main7"
+              icon={<IdcardOutlined />}
+              style={{ marginTop: "auto" }}
+            >
+              {keyToInfo["main7"].text}
             </Menu.Item>
           </Menu>
         </Sider>
@@ -117,15 +140,13 @@ class MainLayout extends React.Component {
               style={{ padding: 24, minHeight: 360 }}
             >
               <Routes>
-                {/* <Route
-                  exact
-                  path="/user/lookup"
-                  element={<UserLookupMainPage />}
-                />
-                <Route exact path="/account" element={<AccoutPage />} />
-                <Route exact path="/keywords" element={<KeywordsPage />} />
-                <Route exact path="/places/map" element={<PlaceManagePage />} />
-                <Route exact path="/places/list" element={<PlaceList />} /> */}
+                <Route exact path="/landing" element={<LandingPage />} />
+                <Route exact path="/table/users" element={<UsersPage />} />
+                <Route exact path="/table/orders" element={<OrdersPage />} />
+                <Route exact path="/table/tickets" element={<TicketsPage />} />
+                <Route exact path="/tickets/enter" element={<EnterPage />} />
+                <Route exact path="/tickets/check" element={<CheckPage />} />
+                <Route exact path="/accounts" element={<AccoutPage />} />
               </Routes>
             </div>
           </Content>
