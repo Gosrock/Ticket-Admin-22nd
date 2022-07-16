@@ -1,5 +1,4 @@
 import axios from "axios";
-axios.defaults.baseURL = "https://api.gosrock.link";
 
 axios.interceptors.response.use(
   (response) => {

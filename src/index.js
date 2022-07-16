@@ -8,7 +8,7 @@ import {
   unstable_HistoryRouter as HistoryRouter,
 } from "react-router-dom";
 import history from "./history";
-import "antd/dist/antd.css";
+import "antd/dist/antd.min.css";
 import App from "./App";
 import requireAuth from "./hoc/requireAuth";
 import AuthPass from "./hoc/AuthPass";

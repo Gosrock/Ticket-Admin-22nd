@@ -1,34 +1,51 @@
-import { AUTH_USER, AUTH_ERROR, AUTH } from "../action-types";
+import {
+  LOGOUT_USER,
+  SLACK_VALIDATION_PENDING,
+  SLACK_VALIDATION_SUCCESS,
+  SLACK_VALIDATION_FAIL,
+} from "../action-types";
 
 const INITIAL_STATE = {
-  authenticated: null,
-  userInfo: null,
-  errorMessage: null,
+  authenticated: false,
+  accessToken: null,
+  user: null,
+  error: null,
   pending: false,
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default function (state = INITIAL_STATE, action) {
+export const auth = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case AUTH:
-      console.log(action.type, action.payload);
-      return { ...state, pending: true };
-    case AUTH_USER:
+    case SLACK_VALIDATION_PENDING:
+      return { ...state, error: null, pending: true };
+    case SLACK_VALIDATION_SUCCESS:
       return {
         ...state,
-        authenticated: action.payload.data.accessToken,
-        userInfo: action.payload.data,
-        errorMessage: null,
+        authenticated: true,
+        accessToken: action.payload.accessToken,
+        user: action.payload.user,
+        error: null,
         pending: false,
       };
-    case AUTH_ERROR:
+    case SLACK_VALIDATION_FAIL:
       return {
         ...state,
-        authenticated: null,
-        errorMessage: action.payload,
+        authenticated: false,
+        accessToken: null,
+        user: null,
+        error: action.payload,
+        pending: false,
+      };
+    case LOGOUT_USER:
+      return {
+        ...state,
+        authenticated: false,
+        accessToken: null,
+        user: null,
+        error: null,
         pending: false,
       };
     default:
       return state;
   }
-}
+};

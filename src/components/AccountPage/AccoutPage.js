@@ -1,19 +1,19 @@
 import React from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { Button } from "antd";
+import { Button, message } from "antd";
+import { useDispatch } from "react-redux";
+import { logout } from "../../state/actions-creators";
 
 function AccoutPage() {
   //   const { data } = useSelector((state) => state.getOriginalPolygon);
-  let navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const onLogoutHandler = () => {
-    localStorage.removeItem("adminAccessToken");
-    // token refresh 요청
-    navigate("/auth/login");
-
+    dispatch(
+      logout(() => {
+        message.success("로그아웃 되셨습니다.");
+      })
+    );
     // 새로운 토큰 저장
-    axios.defaults.headers.common.Authorization = null;
   };
   return (
     <>

@@ -1,69 +1,65 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Form, Input, Button, Row, Col, message } from "antd";
-import { UserOutlined, LockOutlined, SafetyOutlined } from "@ant-design/icons";
+import { PhoneOutlined, SafetyOutlined, MailOutlined } from "@ant-design/icons";
 import "./loginpage.css";
-// import { slackValidation, slackMessage } from "../../../state/actions-creators";
-import { login } from "../../state/actions-creators";
+import { slackValidation, slackMessage } from "../../state/actions-creators";
 
 function LoginPage() {
   const dispatch = useDispatch();
 
-  // const { slackMessageToken } = useSelector((state) => state.slackMessage);
+  const { error } = useSelector((state) => state.slackMessage);
   // const { adminValidationToken } = useSelector(
   //   (state) => state.slackValidation
   // );
-
-  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [slackEmail, setSlackEmail] = useState("");
   const [validationNumber, setValidationNumber] = useState("");
   const [sendSuccess, setSendSuccess] = useState(false);
   const [validationSuccess, setValidationSuccess] = useState(false);
-  const onSubmitHandler = (values) => {
-    // event.preventDefault();
-    let body = {
-      userId: values.email,
-      password: values.password,
-      // adminValidationToken: adminValidationToken,
-    };
-    console.log(body);
-
-    // login 요청
-    dispatch(login(body));
-  };
 
   const onFormValueChangeHandler = (obj) => {
-    if (obj["email"] !== null) {
-      setEmail(obj["email"]);
+    if (obj.slackEmail) {
+      setSlackEmail(obj.slackEmail);
     }
-    if (obj["validationNumber"] !== null) {
-      setValidationNumber(obj["validationNumber"]);
+    if (obj.phoneNumber) {
+      setPhoneNumber(obj.phoneNumber);
+    }
+    if (obj.validationNumber) {
+      setValidationNumber(obj.validationNumber);
     }
   };
 
-  // const onSendMessageNumberHandler = () => {
-  //   if (!email.length) {
-  //     return alert("아이디를 입력해 주세요");
-  //   }
-  //   dispatch(
-  //     slackMessage({ userId: email, type: "login" }, () => {
-  //       message.success("인증번호 전송 완료");
-  //       setSendSuccess(true);
-  //     })
-  //   );
-  // };
+  // useEffect(() => {}, [error]);
 
-  // const onSendValidationNumberHandler = () => {
-  //   if (validationNumber.length !== 6) {
-  //     return alert("6자리를 입력해주세요");
-  //   }
-  //   dispatch(
-  //     slackValidation({ slackMessageToken, validationNumber }, () => {
-  //       message.success("인증 완료");
-  //       setValidationSuccess(true);
-  //       setSendSuccess(false);
-  //     })
-  //   );
-  // };
+  const onSendMessageNumberHandler = () => {
+    console.log(phoneNumber, slackEmail);
+    if (!phoneNumber.length) {
+      return alert("전화번호를 입력해 주세요");
+    }
+    if (!slackEmail.length) {
+      return alert("이메일을 입력해 주세요");
+    }
+    dispatch(
+      slackMessage({ phoneNumber, slackEmail }, () => {
+        message.success("인증번호 전송 완료");
+        setSendSuccess(true);
+      })
+    );
+  };
+
+  const onSendValidationNumberHandler = () => {
+    if (validationNumber.length !== 4) {
+      return alert("4자리를 입력해주세요");
+    }
+    dispatch(
+      slackValidation({ phoneNumber, slackEmail, validationNumber }, () => {
+        message.success("로그인 완료");
+        setValidationSuccess(true);
+        setSendSuccess(false);
+      })
+    );
+  };
 
   return (
     <div
@@ -82,22 +78,37 @@ function LoginPage() {
         initialValues={{
           remember: true,
         }}
-        onFinish={onSubmitHandler}
         onValuesChange={onFormValueChangeHandler}
       >
         <h2>관리자 로그인</h2>
         <Form.Item
-          name="email"
+          name="phoneNumber"
           rules={[
             {
               required: true,
-              message: "아이디 입력해 주세요",
+              message: "전화번호를 입력해주세요",
             },
           ]}
         >
           <Input
-            prefix={<UserOutlined className="site-form-item-icon" />}
-            placeholder="아이디를 입력해주세요"
+            prefix={<PhoneOutlined className="site-form-item-icon" />}
+            placeholder="회원가입한 전화번호를 입력해주세요"
+            disabled={sendSuccess}
+          />
+        </Form.Item>
+        <Form.Item
+          name="slackEmail"
+          rules={[
+            {
+              required: true,
+              message: "이메일을 입력해주세요",
+            },
+          ]}
+        >
+          <Input
+            prefix={<MailOutlined className="site-form-item-icon" />}
+            placeholder="이메일을 입력해주세요"
+            disabled={sendSuccess}
           />
         </Form.Item>
         <Form.Item>
@@ -107,8 +118,8 @@ function LoginPage() {
                 name="validationNumber"
                 rules={[
                   {
-                    len: 6,
-                    message: "인증번호는 6자리입니다.",
+                    len: 4,
+                    message: "인증번호는 4자리입니다.",
                   },
                   {
                     required: true,
@@ -124,45 +135,15 @@ function LoginPage() {
               </Form.Item>
             </Col>
             <Col span={10}>
-              {sendSuccess || validationSuccess ? (
-                <Button
-                  style={{ float: "right" }}
-                  disabled={validationSuccess}
-                  // onClick={onSendValidationNumberHandler}
-                >
-                  인증 하기
-                </Button>
-              ) : (
-                <Button
-                  style={{ float: "right" }}
-                  // onClick={onSendMessageNumberHandler}
-                >
-                  인증 번호 전송
-                </Button>
-              )}
+              <Button
+                style={{ float: "right" }}
+                onClick={onSendMessageNumberHandler}
+                disabled={sendSuccess}
+              >
+                인증 번호 전송
+              </Button>
             </Col>
           </Row>
-        </Form.Item>
-        <Form.Item
-          name="password"
-          rules={[
-            {
-              min: 6,
-              max: 20,
-              message: "6-20자리수 비밀번호를 입력해주세요",
-            },
-            {
-              required: true,
-              message: "비밀번호입력해주세요",
-            },
-          ]}
-        >
-          <Input
-            disabled={!validationSuccess}
-            prefix={<LockOutlined className="site-form-item-icon" />}
-            type="password"
-            placeholder="Password"
-          />
         </Form.Item>
 
         <Form.Item>
@@ -171,16 +152,11 @@ function LoginPage() {
             type="primary"
             htmlType="submit"
             className="login-form-button"
+            onClick={onSendValidationNumberHandler}
           >
-            로그인{" "}
+            로그인
           </Button>
         </Form.Item>
-        <a href="/auth/register" style={{ float: "left" }}>
-          회원가입
-        </a>
-        <a href="/auth/password" style={{ float: "right" }}>
-          비밀번호 찾기
-        </a>
       </Form>
     </div>
   );
