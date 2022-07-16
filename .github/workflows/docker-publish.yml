@@ -3,7 +3,7 @@ on:
   push:
     branches: [main]
     # Publish semver tags as releases.
-    tags: ["v*.*.*"]
+    tags: ['v*.*.*']
 
 jobs:
   build:
@@ -15,7 +15,7 @@ jobs:
         id: docker_meta
         uses: crazy-max/ghaction-docker-meta@v1
         with:
-          images: water0641/ticket-admin
+          images: water0641/ticket-admin-22th
           tag-semver: |
             {{version}}
             {{major}}.{{minor}}
