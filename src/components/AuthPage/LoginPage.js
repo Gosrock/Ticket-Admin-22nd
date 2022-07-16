@@ -35,6 +35,7 @@ function LoginPage() {
       console.log(error);
       alert(error.errorMessage);
     }
+    // pending 도 여기서 관리가능
   }, [error]);
 
   const onSendMessageNumberHandler = () => {
