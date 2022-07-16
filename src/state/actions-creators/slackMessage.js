@@ -23,6 +23,13 @@ export const slackMessage =
         phoneNumber,
         slackEmail,
       });
+      // const response = await axios.post(
+      //   "https://api.gosrock.band/v1/auth/slack/send",
+      //   {
+      //     phoneNumber,
+      //     slackEmail,
+      //   }
+      // );
 
       console.log(response);
 

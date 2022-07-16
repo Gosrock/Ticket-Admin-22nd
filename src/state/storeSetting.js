@@ -20,7 +20,7 @@ const adminAccessToken = localStorage.getItem("accessToken");
 console.log(adminAccessToken);
 // axios Bearer 토큰에 커먼 헤더로 껴놓기 위함
 let authenticated = false;
-if (adminAccessToken !== null && !adminAccessToken.length) {
+if (adminAccessToken && adminAccessToken.length) {
   authenticated = true;
   axios.defaults.headers.common.Authorization = `Bearer ${adminAccessToken}`;
 }

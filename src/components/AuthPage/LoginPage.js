@@ -8,10 +8,10 @@ import { slackValidation, slackMessage } from "../../state/actions-creators";
 function LoginPage() {
   const dispatch = useDispatch();
 
-  const { error } = useSelector((state) => state.slackMessage);
-  // const { adminValidationToken } = useSelector(
-  //   (state) => state.slackValidation
-  // );
+  const { tickets, error, pending } = useSelector(
+    (state) => state.slackMessage
+  );
+
   const [phoneNumber, setPhoneNumber] = useState("");
   const [slackEmail, setSlackEmail] = useState("");
   const [validationNumber, setValidationNumber] = useState("");
