@@ -1,11 +1,11 @@
-const { default: axios, Axios } = require("axios");
-const { default: InstanceSetting } = require("../common/instance.api");
+const { default: axios, Axios } = require('axios');
+const { default: InstanceSetting } = require('../common/instance.api');
 
 // axios.defaults.baseURL = "https://api.gosrock.band";
 
 class AuthApi extends InstanceSetting {
   constructor() {
-    super("https://api.gosrock.band/v1/auth");
+    super('https://api.gosrock.band/v1/auth');
   }
   // {
   //   "phoneNumber": "string",
@@ -13,9 +13,9 @@ class AuthApi extends InstanceSetting {
   // }
 
   requestSlackValidationNumber = async ({ phoneNumber, slackEmail }) => {
-    return await this.axiosInstance.post("/slack/send", {
+    return await this.axiosInstance.post('/slack/send', {
       phoneNumber,
-      slackEmail,
+      slackEmail
     });
   };
 
@@ -28,13 +28,13 @@ class AuthApi extends InstanceSetting {
   validationSlackNumber = async ({
     phoneNumber,
     slackEmail,
-    validationNumber,
+    validationNumber
   }) => {
-    return await this.axiosInstance.post("/slack/validation", {
+    return await this.axiosInstance.post('/slack/validation', {
       phoneNumber,
       slackEmail,
-      validationNumber,
+      validationNumber
     });
   };
 }
-module.exports = new AuthApi();
+export default new AuthApi();
