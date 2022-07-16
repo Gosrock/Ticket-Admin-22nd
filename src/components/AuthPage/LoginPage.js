@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Form, Input, Button, Row, Col, message } from "antd";
 import { PhoneOutlined, SafetyOutlined, MailOutlined } from "@ant-design/icons";
@@ -30,7 +30,12 @@ function LoginPage() {
     }
   };
 
-  // useEffect(() => {}, [error]);
+  useEffect(() => {
+    if (error) {
+      console.log(error);
+      alert(error.errorMessage);
+    }
+  }, [error]);
 
   const onSendMessageNumberHandler = () => {
     console.log(phoneNumber, slackEmail);
@@ -107,7 +112,7 @@ function LoginPage() {
         >
           <Input
             prefix={<MailOutlined className="site-form-item-icon" />}
-            placeholder="이메일을 입력해주세요"
+            placeholder="슬랙 이메일을 입력해주세요"
             disabled={sendSuccess}
           />
         </Form.Item>
@@ -152,6 +157,7 @@ function LoginPage() {
             type="primary"
             htmlType="submit"
             className="login-form-button"
+            disabled={!sendSuccess}
             onClick={onSendValidationNumberHandler}
           >
             로그인

@@ -1,6 +1,7 @@
 import axios from "axios";
-import authApi from "../../apis/auth/Auth.api";
+import authApi from "../../apis/auth/auth.api";
 import ErrorResponse from "../../apis/common/ErrorResponse";
+
 import {
   SLACK_MESSAGE_PENDING,
   SLACK_MESSAGE_SUCCESS,
@@ -32,8 +33,6 @@ export const slackMessage =
 
       callback();
     } catch (e) {
-      console.log(e);
-      alert(e.response.data.error);
       dispatch({
         type: SLACK_MESSAGE_FAIL,
         payload: new ErrorResponse(e.response.data.error),

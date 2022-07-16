@@ -45,7 +45,7 @@ export class ErrorResponse {
     }
 
     this.errorStatus = errorInfo.statusCode;
-    this.errorMessage = errorInfo.errorMessage;
+    this.errorMessage = errorInfo.message;
   }
 
   /**
