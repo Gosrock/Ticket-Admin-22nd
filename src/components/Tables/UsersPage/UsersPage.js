@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
 function UsersPage() {
-  return <div>UsersPage</div>;
+  return <div>ㅁㄴㅇㄹㅁㄴㅇㄹ</div>;
 }
 
 export default UsersPage;
