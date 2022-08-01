@@ -2,9 +2,11 @@ import { combineReducers } from 'redux';
 import { auth } from './auth';
 import examplePagination from './examplePagination';
 import slackMessage from './slackMessage';
+import usersPage from './usersPage';
 
 export default combineReducers({
   slackMessage: slackMessage,
   auth: auth,
-  examplePagination: examplePagination
+  examplePagination: examplePagination,
+  usersPage: usersPage
 });

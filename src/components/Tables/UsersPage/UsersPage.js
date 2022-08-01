@@ -1,7 +1,12 @@
 import React from 'react';
+import UsersPageTable from './Table';
 
 function UsersPage() {
-  return <div>Users Page 파이팅 🙀</div>;
+  return (
+    <div>
+      <UsersPageTable />
+    </div>
+  );
 }
 
 export default UsersPage;
