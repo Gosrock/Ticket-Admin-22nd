@@ -22,10 +22,9 @@ function UsersPageTable() {
   };
 
   useEffect(() => {
-    setPage(page + 1);
     dispatch(
       usersPage({
-        requestPage: page
+        requestPage: 1
       })
     );
   }, [dispatch]);
@@ -52,14 +51,6 @@ function UsersPageTable() {
         }}
         key="id"
         rowKey="id"
-        // onRow={(record, rowIndex) => {
-        //   return {
-        //     onClick: event => {
-        //       console.log(event, record);
-        //       onStopClickHandler(record);
-        //     } // click row
-        //   };
-        // }}
         pageSize={10}
         dataSource={data ? data.userList : []}
       >
