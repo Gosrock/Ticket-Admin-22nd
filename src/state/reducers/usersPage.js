@@ -23,7 +23,16 @@ export default function (
     case USER_PAGE_SUCCESS:
       return { ...state, data: action.payload, error: null, pending: false };
     case USER_PAGE_ERROR:
-      return { ...state, data: [], error: action.payload, pending: false };
+      return {
+        ...state,
+        data: {
+          totalPage: 0,
+          currentPage: 1,
+          userList: []
+        },
+        error: action.payload,
+        pending: false
+      };
     default:
       return state;
   }

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Table } from 'antd';
 import { usersPage } from '../../../state/actions-creators/usersPage';
+import moment from 'moment';
 const { Column } = Table;
 
 function UsersPageTable() {
@@ -58,7 +59,14 @@ function UsersPageTable() {
         <Column title="입금자명" dataIndex="name" key="id" />
         <Column title="전화번호" dataIndex="phoneNumber" key="id" />
         <Column title="구입한 티켓 매수" dataIndex="ticketNum" key="id" />
-        <Column title="가입일" dataIndex="title" key="id" />
+        <Column
+          title="가입일"
+          dataIndex="createAt"
+          key="id"
+          render={element => {
+            return moment(new Date(element)).format('MM월 DD일');
+          }}
+        />
         <Column title="어드민 여부" dataIndex="role" key="id" />
       </Table>
     </>
