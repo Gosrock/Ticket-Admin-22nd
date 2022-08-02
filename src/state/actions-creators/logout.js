@@ -6,7 +6,7 @@ import TicketsApi from '../../apis/tickets/TicketsApi';
 export const logout = callback => async dispatch => {
   dispatch({ type: LOGOUT_USER });
 
-  localStorage.setItem('accessToken', null);
+  localStorage.removeItem('accessToken');
   axios.defaults.headers.common.Authorization = null;
 
   // 자동으로 피쳐로 넘어가게끔

@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
 function TicketsPage() {
-  return <div>TicketsPage</div>;
+  return <div>티켓 페이지</div>;
 }
 
 export default TicketsPage;
