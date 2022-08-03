@@ -140,7 +140,7 @@ function TicketsPage() {
         />
         <Column
           title="Admin"
-          dataIndex="user"
+          dataIndex="admin"
           render={admin => (admin ? admin.name : null)}
           key="id"
         />

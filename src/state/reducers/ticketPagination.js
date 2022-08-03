@@ -65,8 +65,8 @@ export default function (
     case TICKET_PAGINATION_ERROR:
       return { ...state, data: [], error: action.payload, pending: false };
     case STATE_CHANGE:
-      const newTicketList = state.ticketInfo.ticketList.map(element => {
-        if (element._id === action.payload._id) {
+      const newTicketList = state.data.ticketList.map(element => {
+        if (element.id === action.payload.id) {
           return action.payload;
         }
         return element;
@@ -75,8 +75,10 @@ export default function (
       return {
         ...state,
         ticketInfo: {
-          totalResultCount: state.ticketInfo.totalResultCount,
-          ticketList: newTicketList
+          total: state.total,
+          //totalResultCount: state.ticketInfo.totalResultCount,
+          ticketList: newTicketList,
+          currentPage: state.currentPage
         },
         errorMessage: null
       };
