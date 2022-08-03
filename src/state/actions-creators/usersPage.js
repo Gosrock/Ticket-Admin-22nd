@@ -6,15 +6,18 @@ import {
 } from '../action-types';
 
 export const usersPage =
-  ({ requestPage }, callback) =>
+  ({ searchOption, searchString, requestPage }, callback) =>
   async dispatch => {
     try {
       dispatch({ type: USER_PAGE_PENDING });
 
       const response = await axios.get(
-        `https://api.gosrock.band/v1/users/all?order=ASC&page=${requestPage}&take=10`
+        `https://api.gosrock.band/v1/users/all?${searchOption}${searchString}order=ASC&page=${requestPage}&take=10`
       );
 
+      console.log(
+        `https://api.gosrock.band/v1/users/all?${searchOption}${searchString}order=ASC&page=${requestPage}&take=10`
+      );
       console.log('포토 조회액션1', response);
 
       const data = {
