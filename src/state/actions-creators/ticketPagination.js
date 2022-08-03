@@ -42,7 +42,7 @@ export const changeState =
       console.log('status:', e);
       const response = await axios.patch(
         `https://api.gosrock.band/v1/tickets/status`,
-        { ticektId: id, status: e }
+        { ticketId: id, status: e }
       );
       console.log(response.data);
       dispatch({ type: STATE_CHANGE, payload: response.data.data });
