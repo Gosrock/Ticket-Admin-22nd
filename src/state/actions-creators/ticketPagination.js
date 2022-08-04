@@ -68,6 +68,7 @@ export const ticketPagi =
 
       const data = {
         total: response.data.data.meta.itemCount,
+        currentPage: page,
         ticketList: response.data.data.data
       };
 

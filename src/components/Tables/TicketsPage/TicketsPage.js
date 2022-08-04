@@ -16,7 +16,6 @@ function TicketsPage() {
   const { data, pending } = useSelector(state => state.ticketPagination);
   const [page, setPage] = useState(1);
   const [value, setValue] = useState('');
-  const [state, setState] = useState('');
 
   const onSelectStateHandler = (e, id) => {
     console.log(' id값 : ', id);
@@ -27,12 +26,18 @@ function TicketsPage() {
     console.log(e);
     setPage(e);
     dispatch(
-      ticketPagination({
-        requestPage: e
-      })
+      ticketPagi(
+        {
+          requestVal: value
+        },
+        {
+          page: e
+        }
+      )
     );
   };
   console.log(data);
+
   useEffect(() => {
     dispatch(
       ticketPagination({
@@ -48,17 +53,10 @@ function TicketsPage() {
   }, [dispatch]);
 
   const handlefilt = value => {
-    if (value === 'YB') {
-      setState('OB');
-      console.log(state);
-    } else {
-      setState('YB');
-      console.log(state);
-    }
     dispatch(
       ticketPagi(
         {
-          requestVal: state
+          requestVal: value
         },
         { page }
       )
@@ -78,7 +76,7 @@ function TicketsPage() {
             //handlefilt(value);
             console.log(value);
             handlefilt(value);
-          } else {
+          } else if (value === 'YB') {
             setValue(value);
             //handlefilt(value);
             console.log(value);

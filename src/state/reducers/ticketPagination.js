@@ -74,8 +74,8 @@ export default function (
 
       return {
         ...state,
-        ticketInfo: {
-          total: state.total,
+        data: {
+          total: state.data.total,
           //totalResultCount: state.ticketInfo.totalResultCount,
           ticketList: newTicketList,
           currentPage: state.currentPage
