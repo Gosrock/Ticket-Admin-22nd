@@ -8,30 +8,32 @@ const { Column } = Table;
 
 function UsersPageTable() {
   const dispatch = useDispatch();
-  const { data, pending } = useSelector(state => state.usersPage);
+  const { data, pending, option } = useSelector(state => state.usersPage);
   const [page, setPage] = useState(1);
 
   const onPageChange = e => {
+    console.log('page', { data });
     // 페이지네이션 번호 바뀔때 뜸.
     setPage(e);
     dispatch(
       usersPage({
-        searchOption: '',
-        searchString: '',
+        searchOption: option ? option.searchOption : '',
+        searchString: option ? option.searchString : '',
         requestPage: e
       })
     );
   };
 
   useEffect(() => {
+    console.log('search option: ', option.searchOption, option.searchString);
     dispatch(
       usersPage({
-        searchOption: '',
-        searchString: '',
+        searchOption: option ? option.searchOption : '',
+        searchString: option ? option.searchString : '',
         requestPage: 1
       })
     );
-  }, [dispatch]);
+  }, [option]);
 
   // 받을 수 있는 정보 목록
   //   {

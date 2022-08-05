@@ -1,7 +1,9 @@
 import {
   USER_PAGE_PENDING,
   USER_PAGE_SUCCESS,
-  USER_PAGE_ERROR
+  USER_PAGE_ERROR,
+  SEARCH_OPTION_UPDATE,
+  SEARCH_OPTION_UPDATE_ERROR
 } from '../action-types';
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -13,7 +15,11 @@ export default function (
       userList: []
     },
     error: null,
-    pending: false
+    pending: false,
+    option: {
+      searchOption: 'searchName',
+      searchString: ''
+    }
   },
   action
 ) {
@@ -28,8 +34,23 @@ export default function (
         data: {
           totalPage: 0,
           currentPage: 1,
-          userList: []
+          userList: [],
+          searchOption: '',
+          searchString: ''
         },
+        error: action.payload,
+        pending: false
+      };
+    case SEARCH_OPTION_UPDATE:
+      return {
+        ...state,
+        option: action.payload,
+        error: null,
+        pending: false
+      };
+    case SEARCH_OPTION_UPDATE_ERROR:
+      return {
+        ...state,
         error: action.payload,
         pending: false
       };

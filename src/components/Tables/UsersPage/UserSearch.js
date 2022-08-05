@@ -1,7 +1,7 @@
 import { Input, Select } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { usersPage } from '../../../state/actions-creators/usersPage';
+import { updateOption } from '../../../state/actions-creators/usersPage';
 const { Option } = Select;
 
 function UserSearch() {
@@ -29,13 +29,12 @@ function UserSearch() {
 
   useEffect(() => {
     dispatch(
-      usersPage({
-        searchOption: `${searchOption}=`,
-        searchString: `${encodeURI(searchString)}&`,
-        requestPage: 1
+      updateOption({
+        searchOption: searchOption,
+        searchString: searchString
       })
     );
-  }, [searchOption, searchString]);
+  }, [searchString]);
 
   return (
     <>
