@@ -1,18 +1,40 @@
-import { Button, Input, Select } from 'antd';
-import React, { useState } from 'react';
+import { Input, Select } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { updateOption } from '../../../state/actions-creators/usersPage';
 const { Option } = Select;
 
 function UserSearch() {
-  const [searchOption, setSearchOption] = useState('입금자명');
+  const dispatch = useDispatch();
+  const [searchOption, setSearchOption] = useState('searchName');
+  const [searchString, setSearchString] = useState('');
 
   const onOptionChange = e => {
-    console.log(e);
     if (e === '1') {
-      setSearchOption('입금자명');
+      setSearchOption('searchName');
     } else {
-      setSearchOption('전화번호');
+      setSearchOption('phoneNumber');
     }
   };
+
+  const onSearch = e => {
+    setSearchString(e);
+  };
+
+  const handleEnter = e => {
+    if (e.key === 'Enter') {
+      onSearch(e.target.value);
+    }
+  };
+
+  useEffect(() => {
+    dispatch(
+      updateOption({
+        searchOption: searchOption,
+        searchString: searchString
+      })
+    );
+  }, [searchString]);
 
   return (
     <>
@@ -26,13 +48,14 @@ function UserSearch() {
               전화번호
             </Option>
           </Select>
-          <Input
+          <Input.Search
             style={{
               width: 'calc(100% - 200px)'
             }}
-            placeholder={`${searchOption} 입력`}
+            placeholder="search text"
+            onSearch={onSearch}
+            onKeyPress={handleEnter}
           />
-          <Button type="primary">검색</Button>
         </Input.Group>
         <br />
       </div>
