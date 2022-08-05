@@ -15,7 +15,7 @@ function TicketsPage() {
   const dispatch = useDispatch();
   const { data, pending } = useSelector(state => state.ticketPagination);
   const [page, setPage] = useState(1);
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState('All');
 
   const onSelectStateHandler = (e, id) => {
     console.log(' id값 : ', id);
@@ -25,27 +25,35 @@ function TicketsPage() {
   const onPageChange = e => {
     console.log(e);
     setPage(e);
-    dispatch(
-      ticketPagi(
-        {
-          requestVal: value
-        },
-        {
-          page: e
-        }
-      )
-    );
+    if (value === 'All') {
+      dispatch(
+        ticketPagi(
+          {
+            requestVal: null
+          },
+          { page: e }
+        )
+      );
+    } else {
+      dispatch(
+        ticketPagi(
+          {
+            requestVal: value
+          },
+          {
+            page: e
+          }
+        )
+      );
+    }
   };
   console.log(data);
 
   useEffect(() => {
     dispatch(
-      ticketPagination({
-        requestPage: 1
-      }),
       ticketPagi(
         {
-          requestVal: 'YB'
+          requestVal: null
         },
         { page: 1 }
       )
@@ -53,14 +61,25 @@ function TicketsPage() {
   }, [dispatch]);
 
   const handlefilt = value => {
-    dispatch(
-      ticketPagi(
-        {
-          requestVal: value
-        },
-        { page }
-      )
-    );
+    if (value === 'All') {
+      dispatch(
+        ticketPagi(
+          {
+            requestVal: null
+          },
+          { page }
+        )
+      );
+    } else {
+      dispatch(
+        ticketPagi(
+          {
+            requestVal: value
+          },
+          { page }
+        )
+      );
+    }
   };
 
   //해결법?처음에 나오는 두번 클릭....ㅠ
@@ -68,7 +87,7 @@ function TicketsPage() {
   return (
     <>
       <Segmented
-        options={['YB', 'OB']}
+        options={['All', 'YB', 'OB']}
         value={value}
         onChange={value => {
           if (value === 'OB') {
@@ -81,9 +100,14 @@ function TicketsPage() {
             //handlefilt(value);
             console.log(value);
             handlefilt(value);
+          } else if (value === 'All') {
+            setValue(value);
+            console.log(value);
+            handlefilt(value);
           }
         }}
       />
+      <div style={{ marginBottom: '20px' }} />
 
       <Table
         loading={pending}

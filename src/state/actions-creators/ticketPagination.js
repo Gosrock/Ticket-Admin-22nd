@@ -62,7 +62,15 @@ export const ticketPagi =
       dispatch({ type: TICKET_PAGINATION_PENDING });
 
       const response = await axios.get(
-        `https://api.gosrock.band/v1/tickets/find?date=${requestVal}&order=DESC&page=${page}&take=10`
+        `https://api.gosrock.band/v1/tickets/find`,
+        {
+          params: {
+            date: requestVal,
+            order: 'DESC',
+            page: page,
+            take: 10
+          }
+        }
       );
       console.log(response.data);
 
