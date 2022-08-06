@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import moment from 'moment';
 import { useSelector, useDispatch } from 'react-redux';
 import { Table, Segmented, Select } from 'antd';
 import {
@@ -139,8 +139,23 @@ function TicketsPage() {
           render={user => user.name}
           key="id"
         />
+
         <Column title="공연 날짜" dataIndex="date" key="id" />
-        <Column title="예매일자" dataIndex="createdAt" key="id" />
+        <Column
+          title="예매일자"
+          dataIndex="createdAt"
+          render={element => {
+            return moment(element).utc(false).format('MM월DD일 HH:mm');
+          }}
+        />
+        <Column
+          title="업데이트일자"
+          dataIndex="updatedAt"
+          key="id"
+          render={element => {
+            return moment(element).utc(false).format('MM월DD일 HH:mm');
+          }}
+        />
         <Column
           title="Action"
           dataIndex=""
@@ -153,8 +168,12 @@ function TicketsPage() {
                 >
                   <Option value="입금확인">입금확인</Option>
                   <Option value="입장완료">입장완료</Option>
-                  <Option value="기한만료">기한만료</Option>
-                  <Option value="확인대기">확인대기</Option>
+                  <Option value="기한만료" disabled={true}>
+                    기한만료
+                  </Option>
+                  <Option value="확인대기" disabled={true}>
+                    확인대기
+                  </Option>
                 </Select>
               </div>
             );
