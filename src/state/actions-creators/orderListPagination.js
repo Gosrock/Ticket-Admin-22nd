@@ -59,7 +59,7 @@ export const orderListReq =
         {
           params: {
             selection: selection,
-            orders: 'ASC',
+            order: 'DESC',
             page: page,
             take: 10
           }

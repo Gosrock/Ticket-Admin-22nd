@@ -15,19 +15,30 @@ export default function OrdersPage() {
   const { data, pending } = useSelector(state => state.orderListPagination);
   console.log(data);
   const [page, setPage] = useState(1);
-  const [day, setDay] = useState('BOTH');
+  const [day, setDay] = useState('ALL');
 
   const onPageChange = e => {
     // 페이지네이션 번호 바뀔때 뜸.
     console.log(e);
     setPage(e);
 
-    dispatch(orderListReq({ page: e }, { selection: day }));
+    if (day === 'ALL') {
+      dispatch(orderListReq({ page: e }, { selection: null }));
+    } else {
+      dispatch(orderListReq({ page: e }, { selection: day }));
+    }
   };
 
   const handleSegment = day => {
-    dispatch(orderListReq({ page }, { selection: day }));
+    if (day === 'ALL') {
+      dispatch(orderListReq({ page: 1 }, { selection: null }));
+    } else {
+      dispatch(orderListReq({ page: 1 }, { selection: day }));
+    }
+    setPage(1);
   };
+
+  const handleSelector = e => {};
 
   useEffect(() => {
     dispatch(orderListReq({ page: 1 }, { selection: null }));
@@ -36,22 +47,11 @@ export default function OrdersPage() {
   return (
     <>
       <Segmented
-        options={['BOTH', 'YB', 'OB']}
+        options={['ALL', 'BOTH', 'YB', 'OB']}
         value={day}
         onChange={day => {
-          if (day === 'OB') {
-            setDay(day);
-            handleSegment(day);
-            console.log(day);
-          } else if (day === 'YB') {
-            setDay(day);
-            handleSegment(day);
-            console.log(day);
-          } else if (day === 'BOTH') {
-            setDay(day);
-            handleSegment(day);
-            console.log(day);
-          }
+          setDay(day);
+          handleSegment(day);
         }}
       />
 
@@ -90,13 +90,41 @@ export default function OrdersPage() {
         <Column // 주문 상태 변경 가능
           title="주문 상태"
           dataIndex="status"
-          render={status => (status ? status : null)}
+          render={status => {
+            return (
+              <Select
+                defaultValue={status}
+                style={{
+                  width: 120
+                }}
+                onChange={handleSelector}
+              >
+                <Option value="입금확인">입금확인</Option>
+                <Option value="입장완료">입장완료</Option>
+                <Option value="기한만료">기한만료</Option>
+                <Option value="확인대기">확인대기</Option>
+              </Select>
+            );
+          }}
           align="center"
         />
         <Column // 티켓 무료 여부 변경 가능
           title="티켓 무료 여부"
           dataIndex="isFree"
-          render={isFree => (isFree ? '무료' : '유료')}
+          render={isFree => {
+            return (
+              <Select
+                defaultValue={isFree ? '무료' : '유료'}
+                style={{
+                  width: 120
+                }}
+                onChange={handleSelector}
+              >
+                <Option value="무료">무료</Option>
+                <Option value="유료">유료</Option>
+              </Select>
+            );
+          }}
           align="center"
         />
         <Column
