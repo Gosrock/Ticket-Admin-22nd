@@ -22,7 +22,8 @@ function CheckPage() {
       <QrReader
         delay={300}
         onResult={handleScan}
-        style={{ width: '100%', height: '100%' }}
+        style={{ width: '100vw', height: '100vh' }}
+        constraints={{ facingMode: 'environment' }}
       />
     </>
   );
