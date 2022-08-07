@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { QrReader } from 'react-qr-reader';
-import { checkPage } from '../../../state/actions-creators/CheckPage';
+import { checkPage } from '../../../state/actions-creators/checkPage';
 
 function CheckPage() {
   const dispatch = useDispatch();
