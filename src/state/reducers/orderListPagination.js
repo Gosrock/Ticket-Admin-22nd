@@ -1,11 +1,11 @@
 import {
   ORDERS_PENDING,
   ORDERS_SUCCESS,
-  ORDERS_ERROR
-  // STATE_CHANGE,
-  // STATE_CHANGE_ERROR,
-  // SET_FREE_TICKET,
-  // SET_FREE_TICKET_ERROR
+  ORDERS_ERROR,
+  SET_ORDER_STATUS,
+  SET_ORDER_STATUS_ERROR,
+  SET_FREE_TICKET,
+  SET_FREE_TICKET_ERROR
 } from '../action-types';
 
 // eslint-disable-next-line import/no-anonymous-default-export

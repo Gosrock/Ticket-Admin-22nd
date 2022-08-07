@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { useSelector, useDispatch } from 'react-redux';
-import { Segmented, Table, Select } from 'antd';
+import { Segmented, Table, Select, Alert } from 'antd';
 import {
   orderListPagination,
   orderListReq
+} from '../../../state/actions-creators/orderListPagination';
+import {
+  orderStatusChange,
+  orderPriceChange
 } from '../../../state/actions-creators/orderListPagination';
 
 const { Column } = Table;
@@ -38,7 +42,13 @@ export default function OrdersPage() {
     setPage(1);
   };
 
-  const handleSelector = e => {};
+  const handleStatusSelector = (id, e) => {
+    dispatch(orderStatusChange({ id, e }));
+  };
+
+  const handleSetFreeSelector = (id, e) => {
+    dispatch(orderPriceChange({ id, e }));
+  };
 
   useEffect(() => {
     dispatch(orderListReq({ page: 1 }, { selection: null }));
@@ -89,15 +99,15 @@ export default function OrdersPage() {
         />
         <Column // 주문 상태 변경 가능
           title="주문 상태"
-          dataIndex="status"
-          render={status => {
+          dataIndex=""
+          render={element => {
             return (
               <Select
-                defaultValue={status}
+                defaultValue={element.status}
                 style={{
                   width: 120
                 }}
-                onChange={handleSelector}
+                onSelect={e => handleStatusSelector(element.id, e)}
               >
                 <Option value="입금확인">입금확인</Option>
                 <Option value="입장완료">입장완료</Option>
@@ -110,15 +120,15 @@ export default function OrdersPage() {
         />
         <Column // 티켓 무료 여부 변경 가능
           title="티켓 무료 여부"
-          dataIndex="isFree"
-          render={isFree => {
+          dataIndex=""
+          render={element => {
             return (
               <Select
-                defaultValue={isFree ? '무료' : '유료'}
+                defaultValue={element.isFree ? '무료' : '유료'}
                 style={{
                   width: 120
                 }}
-                onChange={handleSelector}
+                onSelect={e => handleSetFreeSelector(element.id, e)}
               >
                 <Option value="무료">무료</Option>
                 <Option value="유료">유료</Option>
@@ -128,9 +138,9 @@ export default function OrdersPage() {
           align="center"
         />
         <Column
-          title="매니저"
+          title="관리자"
           dataIndex="admin"
-          render={admin => (admin ? admin.name : '없음')}
+          render={admin => (admin ? admin.name : null)}
           align="center"
         />
       </Table>
