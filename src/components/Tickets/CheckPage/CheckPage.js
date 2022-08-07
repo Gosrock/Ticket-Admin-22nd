@@ -22,8 +22,23 @@ function CheckPage() {
       <QrReader
         delay={300}
         onResult={handleScan}
-        style={{ width: '100vw', height: '100vh' }}
         constraints={{ facingMode: 'environment' }}
+        videoStyle={{
+          transform: 'translateX(-50%) translateY(-50%)',
+          top: '50%',
+          left: '50%',
+          minWidth: '100%',
+          minHeight: '100%',
+          width: 'auto',
+          height: 'auto',
+          position: 'absolute'
+        }}
+        videoContainerStyle={{
+          display: 'block',
+          width: '100vw',
+          height: '100vh',
+          overflow: 'hidden'
+        }}
       />
     </>
   );
