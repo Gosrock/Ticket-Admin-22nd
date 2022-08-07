@@ -40,6 +40,7 @@ export const changeState =
     try {
       console.log('ticketId:', id);
       console.log('status:', e);
+
       const response = await axios.patch(
         `https://api.gosrock.band/v1/tickets/status`,
         { ticketId: id, status: e }
