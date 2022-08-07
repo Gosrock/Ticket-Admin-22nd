@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { useSelector, useDispatch } from 'react-redux';
-import { Segmented, Table, Select, Alert } from 'antd';
+import { Segmented, Table, Select, message, Popconfirm } from 'antd';
 import {
   orderListPagination,
   orderListReq
@@ -43,6 +43,7 @@ export default function OrdersPage() {
   };
 
   const handleStatusSelector = (id, e) => {
+    // message.info('Success!');
     dispatch(orderStatusChange({ id, e }));
   };
 
