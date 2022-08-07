@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { QrReader } from 'react-qr-reader';
 import { checkPage } from '../../../state/actions-creators/CheckPage';
-
+import './video.css';
+import { ReactComponent as Scanner } from './scanner.svg';
 function CheckPage() {
   const dispatch = useDispatch();
   const [qrScan, setQrScan] = useState('No result');
@@ -23,23 +24,22 @@ function CheckPage() {
         delay={300}
         onResult={handleScan}
         constraints={{ facingMode: 'environment' }}
-        videoStyle={{
-          transform: 'translateX(-50%) translateY(-50%)',
-          top: '50%',
-          left: '50%',
-          minWidth: '100%',
-          minHeight: '100%',
-          width: 'auto',
-          height: 'auto',
-          position: 'absolute'
-        }}
+        videoStyle={{}}
         videoContainerStyle={{
           display: 'block',
           width: '100vw',
           height: '100vh',
-          overflow: 'hidden'
+          overflow: 'hidden',
+          paddingTop: '0'
         }}
       />
+      <div class="app__overlay">
+        <div class="app__overlay-frame"></div>
+        {/* <!-- Scanner animation --> */}
+        <Scanner />
+        <div class="custom-scanner"></div>
+        <div class="app__help-text"></div>
+      </div>
     </>
   );
 }
