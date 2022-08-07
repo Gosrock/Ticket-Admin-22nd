@@ -7,9 +7,9 @@ import {
   STATE_CHANGE_ERROR,
   SET_FREE_TICKET,
   SET_FREE_TICKET_ERROR
-} from '../action-types/orderListPagination';
+} from '../action-types/orderListPagination.js';
 
-export const examplePagination =
+export const orderListPagination =
   ({ requestPage }, callback) =>
   async dispatch => {
     try {
@@ -18,12 +18,12 @@ export const examplePagination =
       const response = await axios.get(
         'https://api.gosrock.band/v1/tickets/find?order=ASC&page=1&take=10'
       );
-      console.log('포토 조회액션', response);
+      console.log('티켓 조회', response);
 
       const data = {
         total: response.data.data.meta.itemCount,
         currentPage: requestPage,
-        orderList: response.data.data
+        orderList: response.data.data.data
       };
 
       dispatch({ type: ORDERS_SUCCESS, payload: data });

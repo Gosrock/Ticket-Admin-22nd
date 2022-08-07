@@ -60,7 +60,7 @@ function TableExample() {
         //   };
         // }}
         pageSize={10}
-        dataSource={data ? data.photoList : []}
+        dataSource={data ? data.photolist : []}
       >
         <Column
           title="썸네일"
