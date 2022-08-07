@@ -34,7 +34,7 @@ function UserSearch() {
         searchString: searchString
       })
     );
-  }, [searchString]);
+  }, [searchOption, searchString]);
 
   return (
     <>

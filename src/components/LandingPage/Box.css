@@ -1,0 +1,29 @@
+
+.Box {
+    width: 200px;
+    border-radius: 4px;
+    background: white;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    cursor: pointer;
+  }
+
+
+  .text1 {
+    color: rgb(185, 185, 185);
+    font-size: 14px;
+    justify-content: left;
+    text-align: left;
+    margin-left: 17pt;
+  }
+
+
+  .text2 {
+    margin-left: 17pt;
+    color: rgb(185, 185, 185);
+    font-size: 30px;
+    justify-content: left;
+    text-align: left;
+  }
