@@ -23,7 +23,7 @@ export const orderListPagination =
       const data = {
         total: response.data.data.meta.itemCount,
         currentPage: requestPage,
-        photoList: response.data.data.data
+        orderList: response.data.data.data
       };
 
       dispatch({ type: ORDERS_SUCCESS, payload: data });

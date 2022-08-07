@@ -6,13 +6,16 @@ import {
 } from '../action-types/CheckPage.js';
 
 export const checkPage =
-  ({ requestPage }, { uuid }, callback) =>
+  ({ uuid }, callback) =>
   async dispatch => {
     try {
       dispatch({ type: CHECKING_PENDING });
 
       const response = await axios.post(
-        `https://api.gosrock.band/v1/tickets/${uuid}/enter`
+        `https://api.gosrock.band/v1/tickets/${uuid}/enter`,
+        {
+          date: 'OB'
+        }
       );
       console.log('서버 응답?', response);
 
@@ -23,5 +26,6 @@ export const checkPage =
     } catch (e) {
       //400 ~
       dispatch({ type: CHECKING_ERROR, payload: '조회 실패' });
+      console.log(e);
     }
   };

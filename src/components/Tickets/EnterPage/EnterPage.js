@@ -1,7 +1,14 @@
-import React from "react";
+import React from 'react';
+import EnterList from './EnterList';
+import SocketConnect from './SocketConnect';
 
 function EnterPage() {
-  return <div>EnterPage</div>;
+  return (
+    <div>
+      <SocketConnect />
+      <EnterList />
+    </div>
+  );
 }
 
 export default EnterPage;
