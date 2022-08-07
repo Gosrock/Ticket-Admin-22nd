@@ -6,7 +6,7 @@ import {
   STATE_CHANGE_ERROR,
   SET_FREE_TICKET,
   SET_FREE_TICKET_ERROR
-} from '../action-types/orderListPagination';
+} from '../action-types';
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default function (
