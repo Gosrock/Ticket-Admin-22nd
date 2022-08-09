@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { useSelector, useDispatch } from 'react-redux';
-import { Table, Segmented, Select } from 'antd';
+import { Table, Segmented, Select, message } from 'antd';
 import {
   ticketPagi,
   ticketPagination
@@ -19,7 +19,7 @@ function TicketsPage() {
 
   const onSelectStateHandler = (e, id) => {
     console.log(' id값 : ', id);
-    dispatch(changeState({ id, e }));
+    dispatch(changeState({ id, e }, message));
   };
 
   const onPageChange = e => {
@@ -81,6 +81,14 @@ function TicketsPage() {
       );
     }
   };
+
+  // const success = () => {
+  //   const hide = message
+  //     .loading('Action in progress..', 2)
+  //     .then(() => message.success('성공', 2));
+
+  //   setTimeout(hide, 2500);
+  // };
 
   //해결법?처음에 나오는 두번 클릭....ㅠ
 

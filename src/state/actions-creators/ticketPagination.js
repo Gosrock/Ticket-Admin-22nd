@@ -35,17 +35,22 @@ export const ticketPagination =
   };
 
 export const changeState =
-  ({ id, e }) =>
+  ({ id, e }, message) =>
   async dispatch => {
     try {
-      console.log('ticketId:', id);
-      console.log('status:', e);
+      message.config({ maxCount: 1 });
+      message.loading(`${id} 상태 ${e}으로 처리중`);
+      // console.log('ticketId:', id);
+      // console.log('status:', e);
 
       const response = await axios.patch(
         `https://api.gosrock.band/v1/tickets/status`,
         { ticketId: id, status: e }
       );
       console.log(response.data);
+      // message.destory();
+      message.success(`${id}티켓 상태 ${e}으로 변경 성공`);
+
       dispatch({ type: STATE_CHANGE, payload: response.data.data });
     } catch (e) {
       console.log(e);
