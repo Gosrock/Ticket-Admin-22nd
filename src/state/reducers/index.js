@@ -7,7 +7,8 @@ import slackMessage from './slackMessage';
 import usersPage from './usersPage';
 import enterPage from './enterPage';
 import orderListPagination from './orderListPagination';
-import CheckPage from './checkPage';
+import CheckPage from './CheckPage';
+import randomCom from './randomCom';
 
 export default combineReducers({
   slackMessage: slackMessage,
@@ -18,5 +19,6 @@ export default combineReducers({
   enterPage: enterPage,
   LandingPage: LandingPage,
   orderListPagination: orderListPagination,
-  checkPage: CheckPage
+  checkPage: CheckPage,
+  randomCom: randomCom
 });

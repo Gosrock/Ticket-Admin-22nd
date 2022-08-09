@@ -1,10 +1,13 @@
 import { Layout, Menu, Breadcrumb } from 'antd';
 import {
   SortAscendingOutlined,
-  GlobalOutlined,
   UserOutlined,
   IdcardOutlined,
-  CompassOutlined
+  PieChartOutlined,
+  ScanOutlined,
+  ExperimentOutlined,
+  LoadingOutlined,
+  BookOutlined
 } from '@ant-design/icons';
 import React from 'react';
 import { withNavigation } from '../../hoc/withRouterForClass';
@@ -17,7 +20,8 @@ import OrdersPage from '../Tables/OrdersPage/OrdersPage';
 import EnterPage from '../Tickets/EnterPage/EnterPage';
 import CheckPage from '../Tickets/CheckPage/CheckPage';
 import AccoutPage from '../AccountPage/AccoutPage';
-import ExamplePage from '../Tables/ExamplePage/ExamplePage';
+
+import CommentRandomPage from '../CommentRandomPage/CommentRandomPage';
 
 const { Content, Footer, Sider } = Layout;
 
@@ -29,7 +33,8 @@ const keyToInfo = {
   main5: { text: '실시간 티켓 입장확인', link: '/tickets/enter' },
   main6: { text: '카메라 입장 확인', link: '/tickets/check' },
   main7: { text: '계정', link: '/accounts' },
-  main8: { text: '예시페이지네이션', link: '/example' }
+  // main8: { text: '예시페이지네이션', link: '/example' },
+  main9: { text: '댓글 추첨', link: '/comment/random' }
 };
 
 let clickedkeyPath = ['main1'];
@@ -87,13 +92,13 @@ class MainLayout extends React.Component {
             }}
             onClick={this.menuClick}
           >
-            <Menu.Item key="main1" icon={<UserOutlined />}>
+            <Menu.Item key="main1" icon={<PieChartOutlined />}>
               {keyToInfo['main1'].text}
             </Menu.Item>
-            <Menu.Item key="main2" icon={<GlobalOutlined />}>
+            <Menu.Item key="main2" icon={<UserOutlined />}>
               {keyToInfo['main2'].text}
             </Menu.Item>
-            <Menu.Item key="main3" icon={<CompassOutlined />}>
+            <Menu.Item key="main3" icon={<BookOutlined />}>
               {keyToInfo['main3'].text}
             </Menu.Item>
             <Menu.Item
@@ -105,14 +110,14 @@ class MainLayout extends React.Component {
             </Menu.Item>
             <Menu.Item
               key="main5"
-              icon={<IdcardOutlined />}
+              icon={<LoadingOutlined />}
               style={{ marginTop: 'auto' }}
             >
               {keyToInfo['main5'].text}
             </Menu.Item>
             <Menu.Item
               key="main6"
-              icon={<IdcardOutlined />}
+              icon={<ScanOutlined />}
               style={{ marginTop: 'auto' }}
             >
               {keyToInfo['main6'].text}
@@ -124,12 +129,19 @@ class MainLayout extends React.Component {
             >
               {keyToInfo['main7'].text}
             </Menu.Item>
-            <Menu.Item
+            {/* <Menu.Item
               key="main8"
               icon={<IdcardOutlined />}
               style={{ marginTop: 'auto' }}
             >
               {keyToInfo['main8'].text}
+            </Menu.Item> */}
+            <Menu.Item
+              key="main9"
+              icon={<ExperimentOutlined />}
+              style={{ marginTop: 'auto' }}
+            >
+              {keyToInfo['main9'].text}
             </Menu.Item>
           </Menu>
         </Sider>
@@ -155,7 +167,12 @@ class MainLayout extends React.Component {
                 <Route exact path="/table/tickets" element={<TicketsPage />} />
                 <Route exact path="/tickets/enter" element={<EnterPage />} />
                 <Route exact path="/accounts" element={<AccoutPage />} />
-                <Route exact path="/example" element={<ExamplePage />} />
+
+                <Route
+                  exact
+                  path="/comment/random"
+                  element={<CommentRandomPage />}
+                />
               </Routes>
             </div>
           </Content>

@@ -3,7 +3,7 @@ import {
   CHECKING_PENDING,
   CHECKING_SUCCESS,
   CHECKING_ERROR
-} from '../action-types/checkPage.js';
+} from '../action-types/CheckPage.js';
 
 export const checkPage =
   ({ uuid }, callback) =>

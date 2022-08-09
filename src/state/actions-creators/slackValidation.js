@@ -23,17 +23,17 @@ export const slackValidation =
       });
 
       console.log(response.data.data);
+      const adminAccessToken = response.data.data.accessToken;
+      localStorage.setItem('accessToken', adminAccessToken);
+      axios.defaults.headers.common.Authorization = `Bearer ${adminAccessToken}`;
       dispatch({
         type: SLACK_VALIDATION_SUCCESS,
         payload: response.data.data
       });
 
-      localStorage.setItem('accessToken', response.data.data.accessToken);
-      axios.defaults.headers.common.Authorization =
-        response.data.data.accessToken;
       // 나중에 api instance 가 늘어났다 이거 설정 해줘야함!!!
 
-      TicketsApi.changeInstanceDefaultHeaders(response.data.data.accessToken);
+      TicketsApi.changeInstanceDefaultHeaders(adminAccessToken);
 
       callback();
     } catch (e) {
