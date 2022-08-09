@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { QrReader } from 'react-qr-reader';
-import { checkPage } from '../../../state/actions-creators/CheckPage';
+import { checkPage } from '../../../state/actions-creators/checkPage';
 import './video.css';
 import { ReactComponent as Scanner } from './scanner.svg';
+
 function CheckPage() {
   const dispatch = useDispatch();
   const [qrScan, setQrScan] = useState('No result');

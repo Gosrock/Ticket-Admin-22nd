@@ -7,7 +7,7 @@ import slackMessage from './slackMessage';
 import usersPage from './usersPage';
 import enterPage from './enterPage';
 import orderListPagination from './orderListPagination';
-import CheckPage from './CheckPage';
+import CheckPage from './checkPage';
 
 export default combineReducers({
   slackMessage: slackMessage,
