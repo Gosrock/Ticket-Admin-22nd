@@ -19,6 +19,7 @@ import TicketsPage from '../Tables/TicketsPage/TicketsPage';
 import OrdersPage from '../Tables/OrdersPage/OrdersPage';
 import EnterPage from '../Tickets/EnterPage/EnterPage';
 import CheckPage from '../Tickets/CheckPage/CheckPage';
+import CheckEnterPage from '../Tickets/CheckPage/CheckEnterPage';
 import AccoutPage from '../AccountPage/AccoutPage';
 
 import CommentRandomPage from '../CommentRandomPage/CommentRandomPage';
@@ -31,7 +32,7 @@ const keyToInfo = {
   main3: { text: '주문목록 페이지', link: '/table/orders' },
   main4: { text: '티켓 페이지', link: '/table/tickets' },
   main5: { text: '실시간 티켓 입장확인', link: '/tickets/enter' },
-  main6: { text: '카메라 입장 확인', link: '/tickets/check' },
+  main6: { text: '카메라 입장 확인', link: '/tickets/checkenter' },
   main7: { text: '계정', link: '/accounts' },
   // main8: { text: '예시페이지네이션', link: '/example' },
   main9: { text: '댓글 추첨', link: '/comment/random' }
@@ -160,14 +161,18 @@ class MainLayout extends React.Component {
               className="site-layout-background"
               style={{ padding: 24, minHeight: 360 }}
             >
-              <Routes>
+              <Routes location={this.props.location}>
                 <Route exact path="/landing" element={<LandingPage />} />
                 <Route exact path="/table/users" element={<UsersPage />} />
                 <Route exact path="/table/orders" element={<OrdersPage />} />
                 <Route exact path="/table/tickets" element={<TicketsPage />} />
                 <Route exact path="/tickets/enter" element={<EnterPage />} />
                 <Route exact path="/accounts" element={<AccoutPage />} />
-
+                <Route
+                  exact
+                  path="tickets/checkenter"
+                  element={<CheckEnterPage />}
+                />
                 <Route
                   exact
                   path="/comment/random"
