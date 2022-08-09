@@ -3,9 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Box } from './Box';
 import { Table } from 'antd';
 import { LandingPage } from '../../state/actions-creators/LandingPage';
-import { randomCom } from '../../state/actions-creators/randomCom';
-
-const { Column } = Table;
 
 function Landing_Page() {
   const dispatch = useDispatch();
@@ -16,24 +13,6 @@ function Landing_Page() {
   }, [dispatch]);
 
   console.log(data);
-
-  function RandomComment() {
-    const { randm } = useSelector(state => state.randomCom);
-
-    useEffect(() => {
-      dispatch(randomCom());
-    }, []);
-
-    return (
-      <div>
-        <Table dataSource={randm ? randm._list : []}>
-          <Column title="댓글 고유 아이디" dataIndex="id" />
-          <Column title="댓글" dataIndex="content" />
-          <Column title="익명 닉네임" dataIndex="nickName" />
-        </Table>
-      </div>
-    );
-  }
 
   return (
     <div style={{ display: 'flex' }}>
@@ -99,7 +78,7 @@ function Landing_Page() {
         )}
       </ul>
 
-      {RandomComment()}
+      {/* {RandomComment()} */}
     </div>
   );
 }

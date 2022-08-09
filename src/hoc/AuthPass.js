@@ -13,7 +13,7 @@ const requireAuth =
     return authenticated === false ? (
       <Component {...props} />
     ) : (
-      <Navigate to="/" />
+      <Navigate to="/landing" />
     );
   };
 
