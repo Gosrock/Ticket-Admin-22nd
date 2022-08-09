@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { useSelector, useDispatch } from 'react-redux';
-import { Table, Segmented, Select } from 'antd';
+import { Table, Segmented, Select, message } from 'antd';
 import {
   ticketPagi,
   ticketPagination
@@ -80,6 +80,14 @@ function TicketsPage() {
         )
       );
     }
+  };
+
+  const success = () => {
+    const hide = message
+      .loading('Action in progress..', 2)
+      .then(() => message.success('성공', 2));
+
+    setTimeout(hide, 2500);
   };
 
   //해결법?처음에 나오는 두번 클릭....ㅠ
@@ -164,7 +172,9 @@ function TicketsPage() {
               <div style={{ justifyContent: 'space-between', margin: '20px' }}>
                 <Select
                   defaultValue={element.status}
-                  onSelect={e => onSelectStateHandler(e, element.id)}
+                  onSelect={
+                    (e => onSelectStateHandler(e, element.id), e => success(e))
+                  }
                 >
                   <Option value="입금확인">입금확인</Option>
                   <Option value="입장완료">입장완료</Option>
