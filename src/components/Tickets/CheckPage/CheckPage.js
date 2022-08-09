@@ -7,13 +7,11 @@ import { ReactComponent as Scanner } from './scanner.svg';
 
 function CheckPage() {
   const dispatch = useDispatch();
-  const [qrScan, setQrScan] = useState('No result');
   const { data, pending } = useSelector(state => state.checkPage);
 
   const handleScan = (result, error) => {
     if (!!result) {
-      setQrScan(result.text);
-      console.log(qrScan);
+      console.log('result:', result);
 
       dispatch(checkPage({ uuid: result.text }));
     }

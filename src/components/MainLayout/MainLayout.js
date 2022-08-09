@@ -154,7 +154,6 @@ class MainLayout extends React.Component {
                 <Route exact path="/table/orders" element={<OrdersPage />} />
                 <Route exact path="/table/tickets" element={<TicketsPage />} />
                 <Route exact path="/tickets/enter" element={<EnterPage />} />
-
                 <Route exact path="/accounts" element={<AccoutPage />} />
                 <Route exact path="/example" element={<ExamplePage />} />
               </Routes>
