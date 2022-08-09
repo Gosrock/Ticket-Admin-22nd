@@ -86,7 +86,7 @@ export const orderListReq =
   };
 
 export const orderStatusChange =
-  ({ id, e }) =>
+  ({ id, e }, message) =>
   async dispatch => {
     try {
       console.log('ID: ', id);
@@ -95,12 +95,15 @@ export const orderStatusChange =
       const intID = parseInt(id);
       console.log(intID);
 
+      message.config({ maxCount: 3 });
+
       const response = await axios.patch(
         //https://api.gosrock.band/v1/orders/status + body
         `https://api.gosrock.band/v1/orders/status`,
         { orderId: intID, status: e }
       );
       console.log(response);
+      message.success(`${id}주문의 상태를 ${e}으로 변경성공`);
 
       dispatch({ type: SET_ORDER_STATUS, payload: response.data.data });
     } catch (e) {

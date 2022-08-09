@@ -1,21 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import history from '../../../history';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { Button } from 'antd';
+import { Button, Radio } from 'antd';
 
 export default function CheckEnterPage() {
   let navigate = useNavigate();
+  const [size, setSize] = useState('large');
 
   const obRearCam = () => {
-    navigate('/tickets/check', {
-      state: {
-        date: 'OB',
-        cam: 'environment'
-      }
-    });
+    // navigate('/tickets/check', {
+    //   state: {
+    //     date: 'OB',
+    //     cam: 'environment'
+    //   }
+    // });
+    history.push(
+      '/tickets/check',
+
+      { date: 'OB', cam: 'environment' }
+    );
   };
 
   const obFrontCam = () => {
+    // navigate('/tickets/check', {
+    //   state: {
+    //     date: 'OB',
+    //     cam: 'user'
+    //   }
+    // });
     history.push(
       '/tickets/check',
 
@@ -23,34 +35,49 @@ export default function CheckEnterPage() {
     );
   };
 
-  //   const ybFrontCam = e => {
-  //     history.push({
-  //       pathname: '/tickets/check',
-  //       state: { date: 'OB', cam: 'user' }
-  //     });
-  //   };
+  const ybRearCam = () => {
+    history.push(
+      '/tickets/check',
 
-  //   const obFrontCam = e => {
-  //     history.push({
-  //       pathname: '/tickets/check',
-  //       state: { date: 'OB', cam: 'user' }
-  //     });
-  //   };
+      { date: 'YB', cam: 'environment' }
+    );
+  };
+
+  const ybFrontCam = () => {
+    history.push(
+      '/tickets/check',
+
+      { date: 'YB', cam: 'user' }
+    );
+  };
 
   return (
-    <>
+    <div
+      style={{
+        display: 'flex',
+        width: '50vw',
+        height: '50vh',
+        justifyContent: 'space-between'
+      }}
+    >
       <Button type="primary" onClick={obRearCam}>
         OB 후방카메라
       </Button>
+      <br />
+      <br />
       <Button type="primary" onClick={obFrontCam}>
         OB 셀프카메라
       </Button>
-      {/* <Button type="primary" onClick={{}}>
+      <br />
+      <br />
+      <Button type="primary" onClick={ybRearCam}>
         YB 후방카메라
       </Button>
-      <Button type="primary" onClick={{}}>
+      <br />
+      <br />
+      <Button type="primary" onClick={ybFrontCam}>
         YB 셀프카메라
-      </Button> */}
-    </>
+      </Button>
+    </div>
   );
 }
