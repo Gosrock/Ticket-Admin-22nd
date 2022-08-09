@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-
 import { useSelector, useDispatch } from 'react-redux';
-import { Table } from 'antd';
+import { Table, Typography } from 'antd';
 import { usersPage } from '../../../state/actions-creators/usersPage';
 import moment from 'moment';
+
 const { Column } = Table;
+const { Text } = Typography;
 
 function UsersPageTable() {
   const dispatch = useDispatch();
@@ -69,10 +70,21 @@ function UsersPageTable() {
           dataIndex="createAt"
           key="id"
           render={element => {
-            return moment(new Date(element)).format('MM월 DD일');
+            return moment(new Date(element)).utc(false).format('MM월 DD일');
           }}
         />
-        <Column title="어드민 여부" dataIndex="role" key="id" />
+        <Column
+          title="어드민 여부"
+          dataIndex="role"
+          key="id"
+          render={element => {
+            return element === 'Admin' ? (
+              <Text type="danger">{element}</Text>
+            ) : (
+              element
+            );
+          }}
+        />
       </Table>
     </>
   );
