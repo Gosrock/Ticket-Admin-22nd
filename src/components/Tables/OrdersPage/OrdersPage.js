@@ -128,7 +128,6 @@ export default function OrdersPage() {
                 onSelect={e => handleStatusSelector(element.id, e)}
               >
                 <Option value="입금확인">입금확인</Option>
-                <Option value="입장완료">입장완료</Option>
                 <Option value="기한만료">기한만료</Option>
                 <Option value="확인대기">확인대기</Option>
               </Select>
