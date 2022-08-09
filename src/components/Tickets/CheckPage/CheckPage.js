@@ -4,6 +4,7 @@ import { QrReader } from 'react-qr-reader';
 import { checkPage } from '../../../state/actions-creators/CheckPage';
 import './video.css';
 import { ReactComponent as Scanner } from './scanner.svg';
+
 function CheckPage() {
   const dispatch = useDispatch();
   const [qrScan, setQrScan] = useState('No result');

@@ -19,7 +19,7 @@ function TicketsPage() {
 
   const onSelectStateHandler = (e, id) => {
     console.log(' id값 : ', id);
-    dispatch(changeState({ id, e }));
+    dispatch(changeState({ id, e }, message));
   };
 
   const onPageChange = e => {
@@ -82,13 +82,13 @@ function TicketsPage() {
     }
   };
 
-  const success = () => {
-    const hide = message
-      .loading('Action in progress..', 2)
-      .then(() => message.success('성공', 2));
+  // const success = () => {
+  //   const hide = message
+  //     .loading('Action in progress..', 2)
+  //     .then(() => message.success('성공', 2));
 
-    setTimeout(hide, 2500);
-  };
+  //   setTimeout(hide, 2500);
+  // };
 
   //해결법?처음에 나오는 두번 클릭....ㅠ
 
@@ -172,9 +172,7 @@ function TicketsPage() {
               <div style={{ justifyContent: 'space-between', margin: '20px' }}>
                 <Select
                   defaultValue={element.status}
-                  onSelect={
-                    (e => onSelectStateHandler(e, element.id), e => success(e))
-                  }
+                  onSelect={e => onSelectStateHandler(e, element.id)}
                 >
                   <Option value="입금확인">입금확인</Option>
                   <Option value="입장완료">입장완료</Option>

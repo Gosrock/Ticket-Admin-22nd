@@ -3,7 +3,9 @@ import { slackValidation } from './slackValidation';
 import { logout } from './logout';
 import { ticketPagination } from './ticketPagination';
 import { LandingPage } from './LandingPage';
+import { orderListPagination } from './orderListPagination';
 import { randomCom } from './randomCom';
+import { checkPage } from './CheckPage';
 
 export {
   slackMessage,
@@ -11,5 +13,7 @@ export {
   logout,
   ticketPagination,
   LandingPage,
-  randomCom
+  orderListPagination,
+  randomCom,
+  checkPage
 };
