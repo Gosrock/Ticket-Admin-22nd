@@ -8,16 +8,19 @@ export default function CheckEnterPage() {
 
   const obRearCam = () => {
     navigate('/tickets/check', {
-      date: 'OB',
-      cam: 'environment'
+      state: {
+        date: 'OB',
+        cam: 'environment'
+      }
     });
   };
 
   const obFrontCam = () => {
-    history.push({
-      pathname: '/tickets/check',
-      state: { date: 'OB', cam: 'user' }
-    });
+    history.push(
+      '/tickets/check',
+
+      { date: 'OB', cam: 'user' }
+    );
   };
 
   //   const ybFrontCam = e => {

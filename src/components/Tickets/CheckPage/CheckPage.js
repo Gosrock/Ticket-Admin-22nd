@@ -7,9 +7,9 @@ import './video.css';
 import { ReactComponent as Scanner } from './scanner.svg';
 import history from '../../../history';
 
-function CheckPage({ location }) {
+function CheckPage() {
   const dispatch = useDispatch();
-  // const location = useLocation();
+  const location = useLocation();
 
   const { data, pending } = useSelector(state => state.checkPage);
 

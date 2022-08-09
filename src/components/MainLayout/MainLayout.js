@@ -161,7 +161,7 @@ class MainLayout extends React.Component {
               className="site-layout-background"
               style={{ padding: 24, minHeight: 360 }}
             >
-              <Routes location={this.props.location}>
+              <Routes>
                 <Route exact path="/landing" element={<LandingPage />} />
                 <Route exact path="/table/users" element={<UsersPage />} />
                 <Route exact path="/table/orders" element={<OrdersPage />} />
