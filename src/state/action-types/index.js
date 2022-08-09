@@ -7,4 +7,5 @@ export * from './usersPage';
 export * from './enterPage';
 export * from './LandingPage';
 export * from './orderListPagination';
-export * from './checkPage';
+export * from './CheckPage';
+export * from './randomCom';
