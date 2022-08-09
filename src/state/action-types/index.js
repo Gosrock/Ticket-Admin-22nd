@@ -8,3 +8,4 @@ export * from './enterPage';
 export * from './LandingPage';
 export * from './orderListPagination';
 export * from './CheckPage';
+export * from './randomCom';
