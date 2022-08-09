@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { useSelector, useDispatch } from 'react-redux';
-import { Segmented, Table, Select, message, Popconfirm } from 'antd';
+import { Segmented, Table, Select, message, Modal } from 'antd';
 import {
   orderListPagination,
   orderListReq
@@ -20,6 +20,8 @@ export default function OrdersPage() {
   console.log(data);
   const [page, setPage] = useState(1);
   const [day, setDay] = useState('ALL');
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [id, setID] = useState('');
 
   const onPageChange = e => {
     // 페이지네이션 번호 바뀔때 뜸.
@@ -43,12 +45,28 @@ export default function OrdersPage() {
   };
 
   const handleStatusSelector = (id, e) => {
-    // message.info('Success!');
+    message.success('티켓 상태 변경 완료: ', e);
     dispatch(orderStatusChange({ id, e }));
   };
 
-  const handleSetFreeSelector = (id, e) => {
-    dispatch(orderPriceChange({ id, e }));
+  const handleSetFreeSelector = id => {
+    console.log('id', id);
+    dispatch(orderPriceChange({ id }));
+  };
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+    handleSetFreeSelector(id);
+    setID('');
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+    setID('');
   };
 
   useEffect(() => {
@@ -56,7 +74,7 @@ export default function OrdersPage() {
   }, [dispatch]);
 
   return (
-    <>
+    <div>
       <Segmented
         options={['ALL', 'BOTH', 'YB', 'OB']}
         value={day}
@@ -65,7 +83,6 @@ export default function OrdersPage() {
           handleSegment(day);
         }}
       />
-
       <Table
         loading={pending}
         pagination={{
@@ -84,7 +101,7 @@ export default function OrdersPage() {
         <Column
           title="입금자명"
           dataIndex="user"
-          render={user => user.name}
+          render={user => (user ? user.name : '??')}
           align="center"
         />
         <Column title="주문 금액" dataIndex="price" align="center" />
@@ -129,10 +146,19 @@ export default function OrdersPage() {
                 style={{
                   width: 120
                 }}
-                onSelect={e => handleSetFreeSelector(element.id, e)}
+                onSelect={e => {
+                  if (e === '무료') {
+                    showModal();
+                    setID(element.id);
+                  }
+                }}
               >
-                <Option value="무료">무료</Option>
-                <Option value="유료">유료</Option>
+                <Option value="무료" disabled={element.isFree ? true : false}>
+                  무료
+                </Option>
+                <Option value="유료" disabled={true}>
+                  유료
+                </Option>
               </Select>
             );
           }}
@@ -145,6 +171,14 @@ export default function OrdersPage() {
           align="center"
         />
       </Table>
-    </>
+      <Modal
+        title="Basic Modal"
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <p>정말 티켓을 무료화하시겠습니까?</p>
+      </Modal>
+    </div>
   );
 }

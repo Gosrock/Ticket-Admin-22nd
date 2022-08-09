@@ -5,8 +5,8 @@ import {
   ORDERS_ERROR,
   SET_ORDER_STATUS,
   SET_ORDER_STATUS_ERROR,
-  SET_FREE_TICKET,
-  SET_FREE_TICKET_ERROR
+  SET_FREE_ORDER,
+  SET_FREE_ORDER_ERROR
 } from '../action-types';
 
 export const orderListPagination =
@@ -110,7 +110,7 @@ export const orderStatusChange =
   };
 
 export const orderPriceChange =
-  ({ id, e }) =>
+  ({ id }) =>
   async dispatch => {
     try {
       const response = await axios.patch(
@@ -118,9 +118,9 @@ export const orderPriceChange =
         `https://api.gosrock.band/v1/orders/${id}/free`
       );
 
-      dispatch({ type: SET_FREE_TICKET, payload: response.data.data });
-    } catch (e) {
-      console.log(e);
-      dispatch({ type: SET_FREE_TICKET_ERROR, payload: e.response.data });
+      dispatch({ type: SET_FREE_ORDER, payload: response.data.data });
+    } catch (error) {
+      console.log(error);
+      dispatch({ type: SET_FREE_ORDER_ERROR, payload: error.response.data });
     }
   };
