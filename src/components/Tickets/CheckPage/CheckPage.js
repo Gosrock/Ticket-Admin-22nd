@@ -6,33 +6,46 @@ import { checkPage } from '../../../state/actions-creators/CheckPage';
 import './video.css';
 import { ReactComponent as Scanner } from './scanner.svg';
 import history from '../../../history';
+import { message } from 'antd';
 
 function CheckPage() {
   const dispatch = useDispatch();
   const location = useLocation();
-  const [isOldOrYoung, setIsOldOrYoung] = useState('');
-  const [isFrontOrRear, setIsFrontOrRear] = useState('');
 
   const { data, pending } = useSelector(state => state.checkPage);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     if (!history.location.state) {
       history.push('ticket/checkenter');
     }
+    console.log(count);
     // console.log('history.location.state:', history.location.state); //result: '{date: 'OB', cam: 'environment'}'
     // console.log('location:', location); //result: '{pathname: '/tickets/check', search: '', hash: '', state: {…}, key: 'xf82gqmb'}'
-    setIsOldOrYoung(history.location.state.date);
-    setIsFrontOrRear(history.location.state.cam); //정상작동!
-  }, [location]);
+  }, [location, count]);
+
+  const addCount = () => {
+    setCount(count + 1);
+  };
 
   const handleScan = (result, error) => {
-    if (!!result) {
+    // console.log('result:', result);
+    addCount();
+    if (result && count >= 4) {
       console.log('result:', result);
-
+      setCount(count + 1);
       dispatch(
-        checkPage({ uuid: result.text }, { date: history.location.state.date })
+        checkPage(
+          { uuid: result.text },
+          { date: history.location.state.date },
+          message,
+          () => {
+            setCount(0);
+          }
+        )
       );
     }
+    console.log('count:', count);
   };
 
   // const handleClick = () => {
@@ -43,9 +56,27 @@ function CheckPage() {
     <>
       {/* <button onClick={handleClick}>dddd</button> // history.location.state.cam 확인용 버튼 */}
       <QrReader
-        delay={300}
-        onResult={handleScan}
-        constraints={{ facingMode: `${history.location.state.cam}` }} // 여기 확인좀
+        delay={500}
+        onResult={(result, error) => {
+          // console.log('result:', result);
+          addCount();
+          if (result && count >= 4) {
+            console.log('result:', result);
+            setCount(count + 1);
+            dispatch(
+              checkPage(
+                { uuid: result.text },
+                { date: history.location.state.date },
+                message,
+                () => {
+                  setCount(0);
+                }
+              )
+            );
+          }
+          console.log('count:', count);
+        }}
+        constraints={{ facingMode: `${history.location.state.cam}` }}
         videoStyle={{}}
         videoContainerStyle={{
           display: 'block',

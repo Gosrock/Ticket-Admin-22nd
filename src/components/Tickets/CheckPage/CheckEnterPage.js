@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import history from '../../../history';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { Button, Radio } from 'antd';
+import { Button } from 'antd';
 
 export default function CheckEnterPage() {
   let navigate = useNavigate();
-  const [size, setSize] = useState('large');
 
   const obRearCam = () => {
     // navigate('/tickets/check', {

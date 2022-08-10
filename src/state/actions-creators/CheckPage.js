@@ -6,7 +6,7 @@ import {
 } from '../action-types/checkPage.js';
 
 export const checkPage =
-  ({ uuid }, { date }, callback) =>
+  ({ uuid }, { date }, message, callback) =>
   async dispatch => {
     try {
       dispatch({ type: CHECKING_PENDING });
@@ -20,13 +20,18 @@ export const checkPage =
       console.log('서버 응답?', response);
       console.log('uuid, date: ', uuid, ',,,,', date);
 
+      message.success('조회에 성공했습니다. 입장이 가능합니다.');
       dispatch({ type: CHECKING_SUCCESS, payload: '조회 성공' });
 
       // 자동으로 피쳐로 넘어가게끔
-      // callback();
+      callback();
     } catch (e) {
-      //400 ~
-      dispatch({ type: CHECKING_ERROR, payload: '조회 실패' });
-      console.log(e);
+      //400 ~ 에러 타입에 따라서 경고메세지 다르게 표시
+      // dispatch({ type: CHECKING_ERROR, payload: error });
+      // console.log('ERROR: ', error.response.data.error.message);
+      const ERROR = e.response.data.error.message;
+      console.log('ERROR:', ERROR);
+      message.warn(`${ERROR}`);
+      dispatch({ type: CHECKING_ERROR, payload: e });
     }
   };
