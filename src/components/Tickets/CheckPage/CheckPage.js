@@ -21,10 +21,9 @@ function CheckPage() {
     if (!history.location.state) {
       history.push('ticket/checkenter');
     }
-    console.log(count);
     // console.log('history.location.state:', history.location.state); //result: '{date: 'OB', cam: 'environment'}'
     // console.log('location:', location); //result: '{pathname: '/tickets/check', search: '', hash: '', state: {…}, key: 'xf82gqmb'}'
-  }, [location, count]);
+  }, [location]);
 
   const handleScan = (result, error) => {
     dispatch(
@@ -59,7 +58,6 @@ function CheckPage() {
           paddingTop: '0'
         }}
       />
-      {count}
       <div class="app__overlay">
         <div class="app__overlay-frame"></div>
         {/* <!-- Scanner animation --> */}
