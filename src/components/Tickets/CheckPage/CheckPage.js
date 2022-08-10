@@ -2,18 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { QrReader } from 'react-qr-reader';
-import { checkPage } from '../../../state/actions-creators/CheckPage';
+import {
+  checkCount,
+  checkPage
+} from '../../../state/actions-creators/CheckPage';
 import './video.css';
 import { ReactComponent as Scanner } from './scanner.svg';
 import history from '../../../history';
+import { message } from 'antd';
 
 function CheckPage() {
   const dispatch = useDispatch();
   const location = useLocation();
-  const [isOldOrYoung, setIsOldOrYoung] = useState('');
-  const [isFrontOrRear, setIsFrontOrRear] = useState('');
 
-  const { data, pending } = useSelector(state => state.checkPage);
+  const { data, pending, count } = useSelector(state => state.checkPage);
 
   useEffect(() => {
     if (!history.location.state) {
@@ -21,18 +23,19 @@ function CheckPage() {
     }
     // console.log('history.location.state:', history.location.state); //result: '{date: 'OB', cam: 'environment'}'
     // console.log('location:', location); //result: '{pathname: '/tickets/check', search: '', hash: '', state: {…}, key: 'xf82gqmb'}'
-    setIsOldOrYoung(history.location.state.date);
-    setIsFrontOrRear(history.location.state.cam); //정상작동!
   }, [location]);
 
   const handleScan = (result, error) => {
-    if (!!result) {
-      console.log('result:', result);
+    dispatch(
+      checkPage(
+        { uuid: result ? result.text : null },
+        { date: history.location.state.date },
+        message
+      )
+    );
 
-      dispatch(
-        checkPage({ uuid: result.text }, { date: history.location.state.date })
-      );
-    }
+    dispatch(checkCount());
+    // console.log('count:', count);
   };
 
   // const handleClick = () => {
@@ -43,9 +46,9 @@ function CheckPage() {
     <>
       {/* <button onClick={handleClick}>dddd</button> // history.location.state.cam 확인용 버튼 */}
       <QrReader
-        delay={300}
+        delay={500}
         onResult={handleScan}
-        constraints={{ facingMode: `${history.location.state.cam}` }} // 여기 확인좀
+        constraints={{ facingMode: `${history.location.state.cam}` }}
         videoStyle={{}}
         videoContainerStyle={{
           display: 'block',
