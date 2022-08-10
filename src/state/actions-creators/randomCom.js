@@ -4,7 +4,7 @@ import { RANDOM_SUCCESS, RANDOM_ERROR } from '../action-types';
 export const randomCom = callback => async dispatch => {
   try {
     const response = await axios.get(
-      `https://api.gosrock.band/v1/users/random/comment?take=5`
+      `https://api.gosrock.band/v1/users/random/comment/userInfo?take=5`
     );
 
     console.log(response.data);

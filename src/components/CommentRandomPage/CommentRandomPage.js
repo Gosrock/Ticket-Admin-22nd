@@ -17,8 +17,29 @@ function CommentRandomPage() {
     <div>
       <Table dataSource={randm ? randm._list : []}>
         <Column width={150} title="댓글 고유 아이디" dataIndex="id" />
-        <Column title="댓글" dataIndex="content" />
+        <Column width={300} title="댓글" dataIndex="content" />
         <Column width={150} title="익명 닉네임" dataIndex="nickName" />
+        <Column
+          width={150}
+          title="유저아이디"
+          dataIndex="userInfo"
+          render={userInfo => (userInfo ? userInfo.id : null)}
+          key="id"
+        />
+        <Column
+          width={150}
+          title="유저전번"
+          dataIndex="userInfo"
+          render={userInfo => (userInfo ? userInfo.phoneNumber : null)}
+          key="id"
+        />
+        <Column
+          width={150}
+          title="입금자명"
+          dataIndex="userInfo"
+          render={userInfo => (userInfo ? userInfo.name : null)}
+          key="id"
+        />
       </Table>
     </div>
   );
