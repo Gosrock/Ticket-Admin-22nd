@@ -52,14 +52,7 @@ export default function CheckEnterPage() {
   };
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        width: '50vw',
-        height: '50vh',
-        justifyContent: 'space-between'
-      }}
-    >
+    <div>
       <Button type="primary" onClick={obRearCam}>
         OB 후방카메라
       </Button>
