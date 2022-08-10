@@ -14,6 +14,8 @@ import { message } from 'antd';
 function CheckPage() {
   const dispatch = useDispatch();
   const location = useLocation();
+  const sucAudio = new Audio(process.env.PUBLIC_URL + '/successSound.mp3');
+  const errAudio = new Audio(process.env.PUBLIC_URL + '/errorSound.mp3');
 
   const { data, pending, count } = useSelector(state => state.checkPage);
 
@@ -21,6 +23,7 @@ function CheckPage() {
     if (!history.location.state) {
       history.push('ticket/checkenter');
     }
+
     // console.log('history.location.state:', history.location.state); //result: '{date: 'OB', cam: 'environment'}'
     // console.log('location:', location); //result: '{pathname: '/tickets/check', search: '', hash: '', state: {…}, key: 'xf82gqmb'}'
   }, [location]);
@@ -30,7 +33,9 @@ function CheckPage() {
       checkPage(
         { uuid: result ? result.text : null },
         { date: history.location.state.date },
-        message
+        message,
+        { sucAudio },
+        { errAudio }
       )
     );
 
@@ -38,13 +43,8 @@ function CheckPage() {
     // console.log('count:', count);
   };
 
-  // const handleClick = () => {
-  //   console.log('cam: ', history.location.state.cam);
-  // };
-
   return (
     <>
-      {/* <button onClick={handleClick}>dddd</button> // history.location.state.cam 확인용 버튼 */}
       <QrReader
         delay={500}
         onResult={handleScan}
