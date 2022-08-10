@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { QrReader } from 'react-qr-reader';
-import { checkPage } from '../../../state/actions-creators/CheckPage';
+import {
+  checkCount,
+  checkPage
+} from '../../../state/actions-creators/CheckPage';
 import './video.css';
 import { ReactComponent as Scanner } from './scanner.svg';
 import history from '../../../history';
@@ -12,8 +15,7 @@ function CheckPage() {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const { data, pending } = useSelector(state => state.checkPage);
-  const [count, setCount] = useState(0);
+  const { data, pending, count } = useSelector(state => state.checkPage);
 
   useEffect(() => {
     if (!history.location.state) {
@@ -24,28 +26,17 @@ function CheckPage() {
     // console.log('location:', location); //result: '{pathname: '/tickets/check', search: '', hash: '', state: {…}, key: 'xf82gqmb'}'
   }, [location, count]);
 
-  const addCount = () => {
-    setCount(count + 1);
-  };
-
   const handleScan = (result, error) => {
-    // console.log('result:', result);
-    addCount();
-    if (result && count >= 4) {
-      console.log('result:', result);
-      setCount(count + 1);
-      dispatch(
-        checkPage(
-          { uuid: result.text },
-          { date: history.location.state.date },
-          message,
-          () => {
-            setCount(0);
-          }
-        )
-      );
-    }
-    console.log('count:', count);
+    dispatch(
+      checkPage(
+        { uuid: result ? result.text : null },
+        { date: history.location.state.date },
+        message
+      )
+    );
+
+    dispatch(checkCount());
+    // console.log('count:', count);
   };
 
   // const handleClick = () => {
@@ -57,25 +48,7 @@ function CheckPage() {
       {/* <button onClick={handleClick}>dddd</button> // history.location.state.cam 확인용 버튼 */}
       <QrReader
         delay={500}
-        onResult={(result, error) => {
-          // console.log('result:', result);
-          addCount();
-          if (result && count >= 4) {
-            console.log('result:', result);
-            setCount(count + 1);
-            dispatch(
-              checkPage(
-                { uuid: result.text },
-                { date: history.location.state.date },
-                message,
-                () => {
-                  setCount(0);
-                }
-              )
-            );
-          }
-          console.log('count:', count);
-        }}
+        onResult={handleScan}
         constraints={{ facingMode: `${history.location.state.cam}` }}
         videoStyle={{}}
         videoContainerStyle={{
@@ -86,6 +59,7 @@ function CheckPage() {
           paddingTop: '0'
         }}
       />
+      {count}
       <div class="app__overlay">
         <div class="app__overlay-frame"></div>
         {/* <!-- Scanner animation --> */}
