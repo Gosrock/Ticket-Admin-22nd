@@ -17,10 +17,12 @@ const { Option } = Select;
 export default function OrdersPage() {
   const dispatch = useDispatch();
   const { data, pending } = useSelector(state => state.orderListPagination);
+  console.log(data);
   const [page, setPage] = useState(1);
   const [day, setDay] = useState('ALL');
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [id, setID] = useState('');
+  const [orderPrice, setOrderPrice] = useState('xx');
 
   const onPageChange = e => {
     // 페이지네이션 번호 바뀔때 뜸.
@@ -60,11 +62,13 @@ export default function OrdersPage() {
     setIsModalVisible(false);
     handleSetFreeSelector(id);
     setID('');
+    setOrderPrice('무료');
   };
 
   const handleCancel = () => {
     setIsModalVisible(false);
     setID('');
+    setOrderPrice('유료');
   };
 
   useEffect(() => {
@@ -113,6 +117,14 @@ export default function OrdersPage() {
             return moment(element).utc(false).format('MM월 DD일 HH:mm');
           }}
         />
+        <Column
+          title="업데이트 일시"
+          dataIndex="updatedAt"
+          align="center"
+          render={element => {
+            return moment(element).utc(false).format('MM월 DD일 HH:mm');
+          }}
+        />
         <Column // 주문 상태 변경 가능
           title="주문 상태"
           dataIndex=""
@@ -140,6 +152,7 @@ export default function OrdersPage() {
             return (
               <Select
                 defaultValue={element.isFree ? '무료' : '유료'}
+                value={element.isFree ? '무료' : '유료'}
                 style={{
                   width: 120
                 }}
