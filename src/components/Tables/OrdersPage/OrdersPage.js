@@ -17,7 +17,6 @@ const { Option } = Select;
 export default function OrdersPage() {
   const dispatch = useDispatch();
   const { data, pending } = useSelector(state => state.orderListPagination);
-  console.log(data);
   const [page, setPage] = useState(1);
   const [day, setDay] = useState('ALL');
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -45,8 +44,7 @@ export default function OrdersPage() {
   };
 
   const handleStatusSelector = (id, e) => {
-    message.success('티켓 상태 변경 완료: ', e);
-    dispatch(orderStatusChange({ id, e }));
+    dispatch(orderStatusChange({ id, e }, message));
   };
 
   const handleSetFreeSelector = id => {
@@ -128,7 +126,6 @@ export default function OrdersPage() {
                 onSelect={e => handleStatusSelector(element.id, e)}
               >
                 <Option value="입금확인">입금확인</Option>
-                <Option value="입장완료">입장완료</Option>
                 <Option value="기한만료">기한만료</Option>
                 <Option value="확인대기">확인대기</Option>
               </Select>
@@ -172,7 +169,7 @@ export default function OrdersPage() {
         />
       </Table>
       <Modal
-        title="Basic Modal"
+        title="공짜 티켓???"
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
