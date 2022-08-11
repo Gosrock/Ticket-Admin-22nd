@@ -7,14 +7,6 @@ import { Card, Tag, Space } from 'antd';
 import moment from 'moment';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import styled from 'styled-components';
-
-styled(Card)`
-  display: flex;
-  height: 100%;
-  justify-content: center;
-  position: relative;
-`;
 
 function RecentEnter() {
   const { enterData } = useSelector(state => state.enterPage);

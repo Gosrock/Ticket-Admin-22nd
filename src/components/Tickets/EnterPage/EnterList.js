@@ -10,6 +10,7 @@ const ContainerHeight = 800;
 
 function EnterList() {
   const { ticketList } = useSelector(state => state.enterPage);
+  const reverse = [...ticketList].reverse();
 
   const onScroll = e => {
     if (
@@ -31,7 +32,7 @@ function EnterList() {
           <Col span={16}>
             <List>
               <VirtualList
-                data={ticketList}
+                data={reverse}
                 height={ContainerHeight}
                 itemHeight={47}
                 itemKey="email"

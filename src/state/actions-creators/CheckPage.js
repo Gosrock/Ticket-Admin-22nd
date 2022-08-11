@@ -8,7 +8,7 @@ import {
 import { store } from '../storeSetting.js';
 
 export const checkPage =
-  ({ uuid }, { date }, message, callback) =>
+  ({ uuid }, { date }, message, { sucAudio }, { errAudio }, callback) =>
   async dispatch => {
     const { checkPage } = store.getState();
     // console.log();
@@ -25,6 +25,7 @@ export const checkPage =
         console.log('서버 응답?', response);
         console.log('uuid, date: ', uuid, ',,,,', date);
 
+        sucAudio.play();
         message.success('조회에 성공했습니다. 입장이 가능합니다.');
         dispatch({ type: CHECKING_SUCCESS, payload: '조회 성공' });
 
@@ -36,6 +37,8 @@ export const checkPage =
         // console.log('ERROR: ', error.response.data.error.message);
         const ERROR = e.response.data.error.message;
         console.log('ERROR:', ERROR);
+
+        errAudio.play();
         message.warn(`${ERROR}`);
         dispatch({ type: CHECKING_ERROR, payload: e });
       }
