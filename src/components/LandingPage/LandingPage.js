@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Box } from './Box';
+import { Table } from 'antd';
 import { LandingPage } from '../../state/actions-creators/LandingPage';
 
 function Landing_Page() {
@@ -76,6 +77,8 @@ function Landing_Page() {
           </div>
         )}
       </ul>
+
+      {/* {RandomComment()} */}
     </div>
   );
 }
