@@ -19,12 +19,10 @@ function TicketsPage() {
   const [value, setValue] = useState('All');
 
   const onSelectStateHandler = (e, id) => {
-    console.log(' id값 : ', id);
     dispatch(changeState({ id, e }, message));
   };
 
   const onPageChange = e => {
-    console.log(e);
     setPage(e);
     if (value === 'All') {
       dispatch(
@@ -48,7 +46,6 @@ function TicketsPage() {
       );
     }
   };
-  console.log(data);
 
   useEffect(() => {
     dispatch(
@@ -140,7 +137,6 @@ function TicketsPage() {
         // onRow={(record, rowIndex) => {
         //   return {
         //     onClick: event => {
-        //       console.log(event, record);
         //       onStopClickHandler(record);
         //     } // click row
         //   };

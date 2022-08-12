@@ -11,6 +11,9 @@ const SocketProvider = ({ children }) => {
   const dispatch = useDispatch();
   const { accessToken } = useSelector(state => state.auth);
   const placement = 'bottomRight';
+  const notificationAudio = new Audio(
+    process.env.PUBLIC_URL + '/notificationSound.mp3'
+  );
 
   const socket = io('https://api.gosrock.band/socket/admin', {
     auth: {
@@ -19,9 +22,7 @@ const SocketProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    socket.on('connect', data => {
-      console.log('connection server', data);
-    });
+    socket.on('connect', data => {});
     socket.on('enter', data => {
       dispatch(
         enterPage({
@@ -43,6 +44,7 @@ const SocketProvider = ({ children }) => {
             <CloseCircleOutlined style={{ color: '#cc8989' }} />
           )
       });
+      notificationAudio.play();
     });
 
     return () => {
@@ -50,11 +52,7 @@ const SocketProvider = ({ children }) => {
     };
   }, []);
 
-  socket.on('connect_error', err => {
-    console.log(err instanceof Error); // true
-    console.log(err.message); // not authorized
-    console.log(err.data); // { content: "Please retry later" }
-  });
+  socket.on('connect_error', err => {});
 
   return <SocketContext.Provider>{children}</SocketContext.Provider>;
 };

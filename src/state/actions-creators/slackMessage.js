@@ -31,7 +31,6 @@ export const slackMessage =
       //     slackEmail,
       //   }
       // );
-      // console.log(response);
 
       dispatch({
         type: SLACK_MESSAGE_SUCCESS,

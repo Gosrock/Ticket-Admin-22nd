@@ -30,7 +30,6 @@ function LoginPage() {
 
   useEffect(() => {
     if (error) {
-      console.log(error);
       alert(error.errorMessage);
     }
     // pending 도 여기서 관리가능
@@ -38,7 +37,6 @@ function LoginPage() {
   }, [error]);
 
   const onSendMessageNumberHandler = () => {
-    console.log(phoneNumber, slackEmail);
     if (!phoneNumber.length) {
       return alert('전화번호를 입력해 주세요');
     }

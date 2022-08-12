@@ -12,7 +12,6 @@ export const logout = callback => async dispatch => {
   // 자동으로 피쳐로 넘어가게끔
   history.push('/auth/login');
   TicketsApi.expireAccessTokne();
-  console.log(TicketsApi.axiosInstance.defaults.headers);
 
   callback();
 };

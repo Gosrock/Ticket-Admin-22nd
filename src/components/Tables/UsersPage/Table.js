@@ -13,7 +13,6 @@ function UsersPageTable() {
   const [page, setPage] = useState(1);
 
   const onPageChange = e => {
-    console.log('page', { data });
     // 페이지네이션 번호 바뀔때 뜸.
     setPage(e);
     dispatch(
@@ -26,7 +25,6 @@ function UsersPageTable() {
   };
 
   useEffect(() => {
-    console.log('search option: ', option.searchOption, option.searchString);
     dispatch(
       usersPage({
         searchOption: option ? option.searchOption : '',
