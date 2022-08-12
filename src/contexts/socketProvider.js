@@ -22,9 +22,7 @@ const SocketProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    socket.on('connect', data => {
-      console.log('connection server', data);
-    });
+    socket.on('connect', data => {});
     socket.on('enter', data => {
       dispatch(
         enterPage({
@@ -54,11 +52,7 @@ const SocketProvider = ({ children }) => {
     };
   }, []);
 
-  socket.on('connect_error', err => {
-    console.log(err instanceof Error); // true
-    console.log(err.message); // not authorized
-    console.log(err.data); // { content: "Please retry later" }
-  });
+  socket.on('connect_error', err => {});
 
   return <SocketContext.Provider>{children}</SocketContext.Provider>;
 };

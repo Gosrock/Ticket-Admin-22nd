@@ -7,14 +7,11 @@ export const randomCom = callback => async dispatch => {
       `https://api.gosrock.band/v1/users/random/comment/userInfo?take=5`
     );
 
-    console.log(response.data);
-
     const randm = {
       _list: response.data.data
     };
     dispatch({ type: RANDOM_SUCCESS, payload: randm });
   } catch (e) {
     dispatch({ type: RANDOM_ERROR, payload: '조회실패' });
-    console.log(e);
   }
 };

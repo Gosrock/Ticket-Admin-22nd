@@ -8,10 +8,9 @@ import {
 import { store } from '../storeSetting.js';
 
 export const checkPage =
-  ({ uuid }, { date }, message, { sucAudio }, { errAudio }, callback) =>
+  ({ uuid }, { date }, message, { qrAudio }, callback) =>
   async dispatch => {
     const { checkPage } = store.getState();
-    // console.log();
     if (uuid && checkPage.count > 4) {
       try {
         dispatch({ type: CHECKING_PENDING });
@@ -22,10 +21,8 @@ export const checkPage =
             date: `${date}`
           }
         );
-        console.log('서버 응답?', response);
-        console.log('uuid, date: ', uuid, ',,,,', date);
 
-        sucAudio.play();
+        qrAudio.play();
         message.success('조회에 성공했습니다. 입장이 가능합니다.');
         dispatch({ type: CHECKING_SUCCESS, payload: '조회 성공' });
 
@@ -34,11 +31,9 @@ export const checkPage =
       } catch (e) {
         //400 ~ 에러 타입에 따라서 경고메세지 다르게 표시
         // dispatch({ type: CHECKING_ERROR, payload: error });
-        // console.log('ERROR: ', error.response.data.error.message);
         const ERROR = e.response.data.error.message;
-        console.log('ERROR:', ERROR);
 
-        errAudio.play();
+        qrAudio.play();
         message.warn(`${ERROR}`);
         dispatch({ type: CHECKING_ERROR, payload: e });
       }

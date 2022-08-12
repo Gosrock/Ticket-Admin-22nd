@@ -6,7 +6,6 @@ export const LandingPage = callback => async dispatch => {
     const response = await axios.get(
       `https://api.gosrock.band/v1/orders/report`
     );
-    console.log(response.data.data);
 
     const newData = response.data.data;
     const data = {
@@ -26,7 +25,6 @@ export const LandingPage = callback => async dispatch => {
     // callback();
   } catch (e) {
     //400 ~
-    console.log(e);
     dispatch({ type: LANDING_PAGE_ERROR, payload: '조회 실패' });
   }
 };
