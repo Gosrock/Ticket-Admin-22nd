@@ -11,6 +11,9 @@ const SocketProvider = ({ children }) => {
   const dispatch = useDispatch();
   const { accessToken } = useSelector(state => state.auth);
   const placement = 'bottomRight';
+  const notificationAudio = new Audio(
+    process.env.PUBLIC_URL + '/notificationSound.mp3'
+  );
 
   const socket = io('https://api.gosrock.band/socket/admin', {
     auth: {
@@ -43,6 +46,7 @@ const SocketProvider = ({ children }) => {
             <CloseCircleOutlined style={{ color: '#cc8989' }} />
           )
       });
+      notificationAudio.play();
     });
 
     return () => {
