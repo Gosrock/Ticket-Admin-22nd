@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { useSelector, useDispatch } from 'react-redux';
-import { Segmented, Table, Select, message, Modal } from 'antd';
+import { Segmented, Table, Select, message, Modal, Tag } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
 import {
   orderListPagination,
   orderListReq
@@ -17,16 +18,15 @@ const { Option } = Select;
 export default function OrdersPage() {
   const dispatch = useDispatch();
   const { data, pending } = useSelector(state => state.orderListPagination);
-  console.log(data);
   const [page, setPage] = useState(1);
   const [day, setDay] = useState('ALL');
+  const [option, setOption] = useState('총');
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [id, setID] = useState('');
   const [orderPrice, setOrderPrice] = useState('xx');
 
   const onPageChange = e => {
     // 페이지네이션 번호 바뀔때 뜸.
-    console.log(e);
     setPage(e);
 
     if (day === 'ALL') {
@@ -50,7 +50,6 @@ export default function OrdersPage() {
   };
 
   const handleSetFreeSelector = id => {
-    console.log('id', id);
     dispatch(orderPriceChange({ id }));
   };
 
@@ -77,14 +76,35 @@ export default function OrdersPage() {
 
   return (
     <div>
-      <Segmented
-        options={['ALL', 'BOTH', 'YB', 'OB']}
-        value={day}
-        onChange={day => {
-          setDay(day);
-          handleSegment(day);
-        }}
-      />
+      <div style={{ display: 'flex' }}>
+        <Segmented
+          options={['ALL', 'BOTH', 'YB', 'OB']}
+          value={day}
+          onChange={day => {
+            setDay(day);
+            handleSegment(day);
+            if (day === 'ALL') {
+              setOption('총');
+            } else if (day === 'BOTH') {
+              setOption('양일권');
+            } else {
+              setOption(day);
+            }
+          }}
+        />
+        <Tag
+          icon={<UserOutlined />}
+          color="default"
+          style={{
+            margin: '4px 0 0 10px',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '50%'
+          }}
+        >
+          {option} 주문 수: {data ? data.total : ''}
+        </Tag>
+      </div>
       <Table
         loading={pending}
         pagination={{

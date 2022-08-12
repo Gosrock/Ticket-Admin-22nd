@@ -8,8 +8,6 @@ const requireAuth =
   ({ ...props }) => {
     const { authenticated } = useSelector(state => state.auth);
 
-    console.log('인증 부분 검사', authenticated, !authenticated);
-
     return authenticated === false ? (
       <Component {...props} />
     ) : (

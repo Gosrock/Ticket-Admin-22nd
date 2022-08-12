@@ -12,8 +12,6 @@ function Landing_Page() {
     dispatch(LandingPage());
   }, [dispatch]);
 
-  console.log(data);
-
   return (
     <div style={{ display: 'flex' }}>
       <ul>

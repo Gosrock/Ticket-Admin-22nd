@@ -26,8 +26,6 @@ export const usersPage =
         }
       );
 
-      console.log('포토 조회액션1', response);
-
       const data = {
         total: response.data.data.meta.itemCount,
         currentPage: requestPage,

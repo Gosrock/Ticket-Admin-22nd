@@ -51,18 +51,15 @@ class MainLayout extends React.Component {
   };
 
   onCollapse = collapsed => {
-    console.log(collapsed);
     this.setState({ collapsed });
   };
   menuClick = ({ item, key, keyPath, domEvent }) => {
-    console.log(keyToInfo[key].link);
     this.props.navigate(keyToInfo[key].link);
     this.setState({ clickedkeyPath: keyPath.reverse() });
   };
 
   render() {
     const { collapsed, clickedkeyPath } = this.state;
-    console.log(window.location.pathname);
     return (
       <Layout style={{ minHeight: '100vh' }}>
         <Sider
