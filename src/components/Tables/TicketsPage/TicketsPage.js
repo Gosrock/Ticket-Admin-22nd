@@ -116,7 +116,7 @@ function TicketsPage() {
             }}
           />
           <Tag icon={<DollarCircleOutlined />} color="default">
-            총 티켓 수:{data ? data.meta.itemCount : ''}
+            총 티켓 수:{data ? data.total : ''}
           </Tag>
         </Space>
       </div>

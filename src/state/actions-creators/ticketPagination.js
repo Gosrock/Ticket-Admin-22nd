@@ -20,8 +20,7 @@ export const ticketPagination =
       const data = {
         total: response.data.data.meta.itemCount,
         currentPage: requestPage,
-        ticketList: response.data.data.data,
-        meta: response.data.data.meta
+        ticketList: response.data.data.data
       };
 
       dispatch({ type: TICKET_PAGINATION_SUCCESS, payload: data });
@@ -78,8 +77,7 @@ export const ticketPagi =
       const data = {
         total: response.data.data.meta.itemCount,
         currentPage: page,
-        ticketList: response.data.data.data,
-        meta: response.data.data.meta
+        ticketList: response.data.data.data
       };
 
       dispatch({ type: TICKET_PAGINATION_SUCCESS, payload: data });
