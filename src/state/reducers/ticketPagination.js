@@ -12,7 +12,8 @@ export default function (
     data: {
       totalPage: 0,
       currentPage: 1,
-      ticketList: []
+      ticketList: [],
+      meta: []
     },
     error: null,
     pending: false
