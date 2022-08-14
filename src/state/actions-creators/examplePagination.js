@@ -18,7 +18,6 @@ export const examplePagination =
       const response = await axios.get(
         'https://api.gosrock.band/v1/tickets/find?order=ASC&page=1&take=10'
       );
-      console.log('포토 조회액션', response);
 
       const data = {
         total: response.data.data.meta.itemCount,

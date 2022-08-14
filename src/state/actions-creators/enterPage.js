@@ -16,8 +16,6 @@ export const enterPage =
       };
 
       dispatch({ type: ENTER_PAGE_SUCCESS, payload: enterData });
-
-      console.log('enterPage data', data);
     } catch (e) {
       dispatch({ type: ENTER_PAGE_ERROR, payload: '입장실패' });
     }

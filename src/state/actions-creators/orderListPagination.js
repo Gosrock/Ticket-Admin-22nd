@@ -30,7 +30,6 @@ export const orderListPagination =
         //   }
         // }
       );
-      console.log('티켓 조회', response);
 
       const data = {
         total: response.data.data.meta.itemCount,
@@ -67,7 +66,6 @@ export const orderListReq =
           }
         }
       );
-      console.log('조건부 티켓 조회', response);
 
       const data = {
         total: response.data.data.meta.itemCount,
@@ -89,11 +87,7 @@ export const orderStatusChange =
   ({ id, e }, message) =>
   async dispatch => {
     try {
-      console.log('ID: ', id);
-      console.log('STATUS: ', e);
-
       const intID = parseInt(id);
-      console.log(intID);
 
       message.config({ maxCount: 3 });
 
@@ -102,12 +96,10 @@ export const orderStatusChange =
         `https://api.gosrock.band/v1/orders/status`,
         { orderId: intID, status: e }
       );
-      console.log(response);
       message.success(`${id}주문의 상태를 ${e}으로 변경성공`);
 
       dispatch({ type: SET_ORDER_STATUS, payload: response.data.data });
     } catch (e) {
-      console.log(e);
       dispatch({ type: SET_ORDER_STATUS_ERROR, payload: e.response.data });
     }
   };
@@ -123,7 +115,6 @@ export const orderPriceChange =
 
       dispatch({ type: SET_FREE_ORDER, payload: response.data.data });
     } catch (error) {
-      console.log(error);
       dispatch({ type: SET_FREE_ORDER_ERROR, payload: error.response.data });
     }
   };

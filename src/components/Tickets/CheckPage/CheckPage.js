@@ -14,8 +14,7 @@ import { message } from 'antd';
 function CheckPage() {
   const dispatch = useDispatch();
   const location = useLocation();
-  const sucAudio = new Audio(process.env.PUBLIC_URL + '/successSound.mp3');
-  const errAudio = new Audio(process.env.PUBLIC_URL + '/errorSound.mp3');
+  const qrAudio = new Audio(process.env.PUBLIC_URL + '/qrSound.mp3');
 
   const { data, pending, count } = useSelector(state => state.checkPage);
 
@@ -23,9 +22,6 @@ function CheckPage() {
     if (!history.location.state) {
       history.push('ticket/checkenter');
     }
-
-    // console.log('history.location.state:', history.location.state); //result: '{date: 'OB', cam: 'environment'}'
-    // console.log('location:', location); //result: '{pathname: '/tickets/check', search: '', hash: '', state: {…}, key: 'xf82gqmb'}'
   }, [location]);
 
   const handleScan = (result, error) => {
@@ -34,13 +30,11 @@ function CheckPage() {
         { uuid: result ? result.text : null },
         { date: history.location.state.date },
         message,
-        { sucAudio },
-        { errAudio }
+        { qrAudio }
       )
     );
 
     dispatch(checkCount());
-    // console.log('count:', count);
   };
 
   return (

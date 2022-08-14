@@ -1,7 +1,8 @@
+import { DollarCircleOutlined } from '@ant-design/icons';
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { useSelector, useDispatch } from 'react-redux';
-import { Table, Segmented, Select, message } from 'antd';
+import { Space, Tag, Table, Segmented, Select, message } from 'antd';
 import {
   ticketPagi,
   ticketPagination
@@ -18,12 +19,10 @@ function TicketsPage() {
   const [value, setValue] = useState('All');
 
   const onSelectStateHandler = (e, id) => {
-    console.log(' id값 : ', id);
     dispatch(changeState({ id, e }, message));
   };
 
   const onPageChange = e => {
-    console.log(e);
     setPage(e);
     if (value === 'All') {
       dispatch(
@@ -47,7 +46,6 @@ function TicketsPage() {
       );
     }
   };
-  console.log(data);
 
   useEffect(() => {
     dispatch(
@@ -94,27 +92,35 @@ function TicketsPage() {
 
   return (
     <>
-      <Segmented
-        options={['All', 'YB', 'OB']}
-        value={value}
-        onChange={value => {
-          if (value === 'OB') {
-            setValue(value);
-            //handlefilt(value);
-            console.log(value);
-            handlefilt(value);
-          } else if (value === 'YB') {
-            setValue(value);
-            //handlefilt(value);
-            console.log(value);
-            handlefilt(value);
-          } else if (value === 'All') {
-            setValue(value);
-            console.log(value);
-            handlefilt(value);
-          }
-        }}
-      />
+      <div>
+        <Space size="middle">
+          <Segmented
+            options={['All', 'YB', 'OB']}
+            value={value}
+            onChange={value => {
+              if (value === 'OB') {
+                setValue(value);
+                //handlefilt(value);
+                console.log(value);
+                handlefilt(value);
+              } else if (value === 'YB') {
+                setValue(value);
+                //handlefilt(value);
+                console.log(value);
+                handlefilt(value);
+              } else if (value === 'All') {
+                setValue(value);
+                console.log(value);
+                handlefilt(value);
+              }
+            }}
+          />
+          <Tag icon={<DollarCircleOutlined />} color="default">
+            총 티켓 수:{data ? data.meta.itemCount : ''}
+          </Tag>
+        </Space>
+      </div>
+
       <div style={{ marginBottom: '20px' }} />
 
       <Table
@@ -131,7 +137,6 @@ function TicketsPage() {
         // onRow={(record, rowIndex) => {
         //   return {
         //     onClick: event => {
-        //       console.log(event, record);
         //       onStopClickHandler(record);
         //     } // click row
         //   };

@@ -22,7 +22,6 @@ export const slackValidation =
         validationNumber
       });
 
-      console.log(response.data.data);
       const adminAccessToken = response.data.data.accessToken;
       localStorage.setItem('accessToken', adminAccessToken);
       axios.defaults.headers.common.Authorization = `Bearer ${adminAccessToken}`;
@@ -38,7 +37,6 @@ export const slackValidation =
       callback();
     } catch (e) {
       //400 ~
-      console.log(e);
       alert(e.response.data.message);
       dispatch({
         type: SLACK_VALIDATION_FAIL,
