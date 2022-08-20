@@ -1,70 +1,150 @@
-# Getting Started with Create React App
+![Frame 34257](https://user-images.githubusercontent.com/55226431/184820864-e8573a2b-b48d-4eb9-a5f7-25ecf7192ec6.png)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+# 고스락 티켓 2.0<img src="https://user-images.githubusercontent.com/55226431/184821608-3b631082-fefa-48cf-b9d3-bf4902ddcbff.png" align=left width=100>
 
-In the project directory, you can run:
+> 22번째 정기공연 [We are GOSROCK, Invites you] • <b>관리자</b> 레포지토리
 
-### `npm start`
+<img width="100%" alt="readme" src="https://user-images.githubusercontent.com/55226431/184920291-3959f18b-4578-4681-b476-c9a2bf7dfc48.png">
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<br/><br/>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 💻 사용 스택
 
-### `npm test`
+<div align="left">
+<div>
+  <img src="https://img.shields.io/badge/Javascript-F7DF1E?style=flat-square&logo=javascript&logoColor=white">
+  <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black">
+  <img src="https://img.shields.io/badge/Redux-764ABC?style=flat-square&logo=Redux&logoColor=white">
+  <img src="https://img.shields.io/badge/Socket.io-010101?style=flat-square&logo=socket.io&logoColor=white">
+</div>
+<div>
+  <img src="https://img.shields.io/badge/ESlint-4B32C3?style=flat-square&logo=eslint&logoColor=white">
+  <img src="https://img.shields.io/badge/Prettier-F7B93E?style=flat-square&logo=prettier&logoColor=white">
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=Docker&logoColor=white">
+  <img src="https://img.shields.io/badge/Slack-4A154B?style=flat-square&logo=slack&logoColor=white">
+</div>
+</div>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+<br/>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🎨 디자인
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+[Figma](https://www.figma.com/file/J6HVLxWGuCFgAQUCdWBUsT/%EA%B3%A0%EC%8A%A4%EB%9D%BD-%ED%8B%B0%EC%BC%93%EC%98%88%EB%A7%A4?node-id=2026%3A6310)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![image](https://user-images.githubusercontent.com/103591752/185014363-102b0cee-aad0-4c92-aef8-440f49fc592c.png)
 
-### `npm run eject`
+<h3>- 로그인 페이지</h3>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+<img src="https://user-images.githubusercontent.com/103591752/185020655-3be6d773-7d5f-436b-8c16-e08eaa282f24.gif" width='100%'>
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<h3>- 티켓 통계(티켓 수, 판매 총액, 입금 현황)</h3>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+<img src="https://user-images.githubusercontent.com/103591752/185022646-69667fe9-06ee-4d14-ae9a-eaf2fde57803.png" width='100%'>
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+<h3>- 유저 조회 검색</h3>
 
-## Learn More
+<img src="https://user-images.githubusercontent.com/103591752/185023571-d30bf932-2044-4e5f-a059-64e280dd1533.gif" width='100%'>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<h3>- 주문 조회 검색</h3>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<img src="https://user-images.githubusercontent.com/103591752/185023654-b92c2fd7-bf7c-4e34-9903-43ad4caee817.gif" width='100%'>
 
-### Code Splitting
+<h3>- 티켓 조회 검색</h3>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+<img src="https://user-images.githubusercontent.com/103591752/185023719-ae4f9019-7762-481d-94bf-97ab39d995d7.gif" width='100%'>
 
-### Analyzing the Bundle Size
+<h3>- 실시간 티켓 입장 확인</h3>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+<img src="https://user-images.githubusercontent.com/103591752/185023867-1bada2e9-06f7-446f-829b-0c07abff696a.gif" width='100%'>
 
-### Making a Progressive Web App
+<h3>- 실시간 티켓 입장 확인 알람</h3>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+<img src="https://user-images.githubusercontent.com/103591752/185023940-4251efcf-f027-41b1-9d00-4e9e0e490de4.gif" width='100%'>
 
-### Advanced Configuration
+<h3>- 전후방 카메라를 통한 입장 확인(QR코드 인식)</h3>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+<img src="https://cdn.discordapp.com/attachments/930835636670320661/1007657672981610637/RPReplay_Final1660287783.gif" >
 
-### Deployment
+<h3>- 댓글 추첨</h3>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+<img src="https://user-images.githubusercontent.com/103591752/185024089-e797c456-658b-4851-9a13-ad5f05c728b0.gif" width='100%'>
 
-### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<br/>
+
+## 📂 폴더 구조
+
+
+```shell
+├─ .github
+├─ .gitignore
+├─ .husky
+├─ nginx
+├─ public
+└─ src
+   ├─ apis
+   ├─ components
+   │  ├─ AccountPage
+   │  ├─ AuthPage
+   │  ├─ CommentRandomPage
+   │  ├─ LandingPage
+   │  ├─ MainLayout
+   │  ├─ Tables
+   │  │  ├─ OrdersPage
+   │  │  ├─ TicketsPage
+   │  │  └─ UsersPage
+   │  └─ Tickets
+   ├─ config
+   ├─ contexts
+   ├─ hoc
+   ├─ state 
+   ├─ App.css
+   ├─ App.js
+   ├─ history.js
+   └─ index.js
+```
+
+<br/>
+
+## 👥 참여자
+
+<table>
+    <tr align="center">
+        <td><B>Leader<B></td>
+        <td><B>Admin<B></td>
+        <td><B>Admin<B></td>
+        <td><B>Admin<B></td>
+    </tr>
+    <tr align="center">
+        <td><B>이찬진<B></td>
+        <td><B>봉세환<B></td>
+        <td><B>강나연<B></td>
+        <td><B>이한비<B></td>
+    </tr>
+    <tr align="center">
+        <td>
+            <img src="https://github.com/ImNM.png?size=100">
+            <br>
+            <a href="https://github.com/ImNM"><I>ImNM</I></a>
+        </td>
+        <td>
+            <img src="https://github.com/bongsh0112.png?size=100" width="100">
+            <br>
+            <a href="https://github.com/bongsh0112"><I>bongsh0112</I></a>
+        </td>
+        <td>
+            <img src="https://github.com/kongnayeon.png?size=100">
+            <br>
+            <a href="https://github.com/kongnayeon"><I>kongnayeon</I></a>
+        </td>
+        <td>
+            <img src="https://github.com/AlmondBreez3.png?size=100" width="100">
+            <br>
+            <a href="https://github.com/AlmondBreez3"><I>AlmondBreez3</I></a>
+        </td>
+    </tr>
+</table>
+
+
